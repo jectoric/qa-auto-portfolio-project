@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "types": [
+            "node",
+            "@wdio/globals/types",
+            "expect-webdriverio",
+            "@wdio/jasmine-framework",
+            "mocha",
+        ],
+        "target": "es2022"
+    },
+    "include": [
+        "./google-translate-autotests/**/**/*.ts",
+    ]
+}
