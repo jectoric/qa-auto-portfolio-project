@@ -1,39 +1,53 @@
 # qa-auto-portfolio-project
 
-**qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) site and works on the WebdriverIO automation framework. Autotests check the functionality of a site based on priority. <!--In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)-->
+**qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) site and works on the WebdriverIO automation framework. Autotests check the functionality of a site on Chrome and Firefox browsers. <!--In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)-->
 
 > [!NOTE]
 > The project was created to demonstrate my test automation skills, there was no goal to cover all functionality and views of Google Translate
 
 ## Features 
-- Executing autotests separatly by suite name (Smoke/Regression<!-- /UI Comparison-->)
-<!-- - Running tests on Chrome and Firefox browsers
-- UI Comparison autotests that allows to compare current view with predefined scrennshot 
+- Executing autotests separatly by suite name (Smoke or Regression<!-- /UI Comparison-->)
+- Running autotests on Chrome and Firefox browsers
+<!-- - UI Comparison autotests that allows to compare current view with predefined scrennshot 
 ADD UI COMPARISON PHOTO
 - Remote autotests run on CircleCI -->
 
+<!-- ## DEMO -->
+<!-- add presentation and ui regression screen -->
+
 ## Setup project and run autotests locally ⚙️
-### Precondition:
-- Installed Chrome browser latest version
+### 1. Precondition:
+- Installed Chrome browser
+- Installed Firefox browser
 - Downloaded [Node.js and NPM](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac)
 
-### Setup project:
-1. Download project to your computer
-2. Install node modules
+### 2. Setup project:
+- Install node modules using command:
 ```
 npm install
 ```
 
-### Run tests:
-<!-- (Add command for starting from dif browsers later) -->
-- To run **all tests** naviagte to the package.json and start script `run-all-test-cases` or use command:
+### 3. Run tests:
+To run **all tests** on **Chrome** or **Firefox** naviagte to the package.json and start script `run-all-test-cases-chrome` or `run-all-test-cases-firefox`. You can use next commands to run tests via terminal:
+
+- Run all tests for **Chrome**
 ```
 wdio run ./wdio.conf_chrome.js
 ```
+- Run all tests for **Firefox**
+```
+wdio run ./wdio.conf_firefox.js
+```
 
-- Also you can run only **smoke** or **regression** tests using appropriate package.json scripts `run-smoke-test-cases` and `run-regression-test-cases` or by adding `--suite` to the command:
+Also you can run only **smoke** or **regression** tests using appropriate package.json scripts or by adding `--suite` to the command. Here are examples:
+
+- Run **Smoke** tests on **Chrome** - script `run-smoke-test-cases-chrome` or command
 ```
 wdio run ./wdio.conf_chrome.js --suite=smoke_tests
+```
+- Run **Regression** tests on **Firefox** - script `run-regression-test-cases-firefox` or command
+```
+wdio run ./wdio.conf_firefox.js --suite=regression_tests
 ```
 <!-- ADD UI REGRESSION LATER -->
 

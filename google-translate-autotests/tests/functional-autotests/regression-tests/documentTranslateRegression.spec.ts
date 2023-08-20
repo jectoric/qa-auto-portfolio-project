@@ -9,7 +9,7 @@ describe('Google Translate | Document Translate Regression Tests', () => {
     const pageActions: PageActions = new PageActions();
     const documentTranslatePage: DocumentTranslatePage = new DocumentTranslatePage();
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         await pageActions.openPage(constants.BaseURL);
         await commonPage.clickGoogleTransalteTab('Document');
     });

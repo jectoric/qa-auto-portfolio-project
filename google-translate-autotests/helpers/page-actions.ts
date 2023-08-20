@@ -209,7 +209,7 @@ export class PageActions {
         try {
             await this.waitAndClear(element);
             await element.setValue(inputValue);
-            await browser.pause(WAIT_FOR_SCRIPT); 
+            await browser.pause(WAIT_FOR_SCRIPT);
         } catch (error) {
             throw new Error(`Unable to fill ${await element.selector} element with ${inputValue} value: ${error}`);
         }
@@ -234,6 +234,11 @@ export class PageActions {
     // FILES INTERACTION METHODS
     //-----------------------------------------------------------
 
+    /**
+     * This function waits for a file to exist at the specified path within the given timeout period.
+     * @param {string} filePath | The path to the file being checked
+     * @param {number} timeout | Custom timeout
+     */
     protected async waitForFileExists(filePath: string, timeout: number = TIMEOUT): Promise<void> {
         let to = timeout ? timeout : browser.config.waitforTimeout;
         let mess = `The file ${filePath} did not exist within ${timeout}ms`;

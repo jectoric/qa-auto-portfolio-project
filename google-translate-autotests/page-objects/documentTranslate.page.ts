@@ -31,7 +31,7 @@ export class DocumentTranslatePage extends PageActions {
     }
 
     private get documentUploadInput() {
-        return $('input[name="file"]');
+        return $('//div[text()="Choose a document"]/ancestor::div[1]//input[@name="file"]');
     }
 
     private translateButton(buttonText: string) {

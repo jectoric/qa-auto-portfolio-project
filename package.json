@@ -5,9 +5,12 @@
     "description": "This is an example project which shows the level of my automation testing skills",
     "main": "index.js",
     "scripts": {
-        "run-all-test-cases": "wdio run ./wdio.conf_chrome.js",
-        "run-smoke-test-cases": "wdio run ./wdio.conf_chrome.js --suite=smoke_tests",
-        "run-regression-test-cases": "wdio run ./wdio.conf_chrome.js --suite=regression_tests"
+        "run-all-test-cases-chrome": "wdio run ./wdio.conf_chrome.js",
+        "run-smoke-test-cases-chrome": "wdio run ./wdio.conf_chrome.js --suite=smoke_tests",
+        "run-regression-test-cases-chrome": "wdio run ./wdio.conf_chrome.js --suite=regression_tests",
+        "run-all-test-cases-firefox": "wdio run ./wdio.conf_chrome.js",
+        "run-smoke-test-cases-firefox": "wdio run ./wdio.conf_firefox.js --suite=smoke_tests",
+        "run-regression-test-cases-firefox": "wdio run ./wdio.conf_firefox.js --suite=regression_tests"
     },
     "license": "ISC",
     "dependencies": {
