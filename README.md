@@ -12,8 +12,16 @@
 ADD UI COMPARISON PHOTO
 - Remote autotests run on CircleCI -->
 
-<!-- ## DEMO -->
+## Demo
+<img src="./google-translate-autotests/demo/demo.gif" width=1000/>
 <!-- add presentation and ui regression screen -->
+
+## Structure
+- Folder with function test cases `google-translate-autotests/tests/functional-autotests`
+<!-- - Folder with non-function test cases `` -->
+- Folder with page objects `google-translate-autotests/page-objects`
+- Folder with helpers `google-translate-autotests/helpers`
+- Folder with test data (files, images) `google-translate-autotests/data`
 
 ## Setup project and run autotests locally ⚙️
 ### 1. Precondition:
