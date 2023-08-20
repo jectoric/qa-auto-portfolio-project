@@ -1,13 +1,14 @@
 # qa-auto-portfolio-project
 
-**qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) siteand works on the WebdriverIO automation framework. Autotests check the functionality of the site based on priority. <!--In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)-->
+**qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) site and works on the WebdriverIO automation framework. Autotests check the functionality of a site based on priority. <!--In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)-->
 
 > [!NOTE]
 > The project was created to demonstrate my test automation skills, there was no goal to cover all functionality and views of Google Translate
 
 ## Features 
 - Executing autotests separatly by suite name (Smoke/Regression<!-- /UI Comparison-->)
-<!-- - UI Comparison autotests that allows to compare current view with predefined scrennshot 
+<!-- - Running tests on Chrome and Firefox browsers
+- UI Comparison autotests that allows to compare current view with predefined scrennshot 
 ADD UI COMPARISON PHOTO
 - Remote autotests run on CircleCI -->
 
@@ -24,6 +25,7 @@ npm install
 ```
 
 ### Run tests:
+<!-- (Add command for starting from dif browsers later) -->
 - To run **all tests** naviagte to the package.json and start script `run-all-test-cases` or use command:
 ```
 wdio run ./wdio.conf_chrome.js
