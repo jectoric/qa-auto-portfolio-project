@@ -18,10 +18,10 @@ ADD UI COMPARISON PHOTO
 
 ## Structure
 - Folder with function test cases `google-translate-autotests/tests/functional-autotests`
-<!-- - Folder with non-function test cases `` -->
 - Folder with page objects `google-translate-autotests/page-objects`
 - Folder with helpers `google-translate-autotests/helpers`
 - Folder with test data (files, images) `google-translate-autotests/data`
+<!-- - Folder with non-function test cases `` -->
 
 ## Setup project and run autotests locally ⚙️
 ### 1. Precondition:
