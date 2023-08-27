@@ -262,10 +262,12 @@ export class PageActions {
      * @param {string} referenceImagePath | Path to the reference image for comparison.
      * @param {string} tempScreenshotPath | Path to temporarily store the captured screenshot.
      * @param {number} threshold | Maximum acceptable difference percentage (default is 1.0).
+     * @param {number} waitBeforeScreenshot | Wait time before taking screenshot
      */
-    public async compareScreenshotWithReference(referenceImagePath: string, tempScreenshotPath: string, threshold: number = 1.0): Promise<void> {
+    public async compareScreenshotWithReference(referenceImagePath: string, tempScreenshotPath: string, threshold: number = 1.0, waitBeforeScreenshot: number = 2000): Promise<void> {
         try {
             // Take screenshot
+            await browser.pause(waitBeforeScreenshot);
             const screenshot = await browser.takeScreenshot();
             fs.writeFileSync(tempScreenshotPath, Buffer.from(screenshot, 'base64'));
 
