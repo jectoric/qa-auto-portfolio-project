@@ -59,7 +59,7 @@ describe('Google Translate | Text Translate Smoke Tests', () => {
         await textTranslatePage.insertSourceText(constants.ukrTranslateCheckText);
         await textTranslatePage.checkTranscriptionRowText(constants.ukrTextTranscription);
 
-        // Check for Traget field
+        // Check for Target field
         await textTranslatePage.clickClearSourceText(constants.ukrTranslateCheckText);
         await selectLanguagePage.clickSwapLanguages(tabName);
         await textTranslatePage.insertSourceText(constants.engTranslateCheckText);
@@ -74,9 +74,9 @@ describe('Google Translate | Text Translate Smoke Tests', () => {
         await textTranslatePage.clickTranscriptionRowButton('Source', 'Show more');
         await textTranslatePage.clickTranscriptionRowButton('Source', 'Show less');
 
-        // Check for Traget field
+        // Check for Target field
         await selectLanguagePage.clickSwapLanguages(tabName);
-        await textTranslatePage.clickTranscriptionRowButton('Traget', 'Show more');
-        await textTranslatePage.clickTranscriptionRowButton('Traget', 'Show less');
+        await textTranslatePage.clickTranscriptionRowButton('Target', 'Show more');
+        await textTranslatePage.clickTranscriptionRowButton('Target', 'Show less');
     });
 });

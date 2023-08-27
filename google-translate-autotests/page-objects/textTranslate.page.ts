@@ -115,7 +115,7 @@ export class TextTranslatePage extends PageActions {
             case 'Source':
                 number = 1;
                 break;
-            case 'Traget':
+            case 'Target':
                 number = 2;
                 break;
         }
@@ -123,9 +123,9 @@ export class TextTranslatePage extends PageActions {
         await this.waitElementInvisible(this.transcriptionRowButton(buttonName, number));
     }
 
-    public async checkTargetFieldLink(tragetLink: string, transaltedLink: string) {
-        await this.waitElementVisible(this.targetFieldLink(tragetLink));
-        await this.waitClick(this.targetFieldLink(tragetLink));
+    public async checkTargetFieldLink(targetLink: string, transaltedLink: string) {
+        await this.waitElementVisible(this.targetFieldLink(targetLink));
+        await this.waitClick(this.targetFieldLink(targetLink));
         await websitesTranslatePage.openTranslatedWebsite(transaltedLink);
     }
 }

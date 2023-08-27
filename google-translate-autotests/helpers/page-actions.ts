@@ -1,5 +1,6 @@
 'use strict';
 import * as fs from 'fs';
+import { isImagesPixelsMatch } from './image-comparison';
 const TIMEOUT = 10000;
 const WAIT_FOR_SCRIPT: number = 500;
 
@@ -251,4 +252,33 @@ export class PageActions {
             }
         }, { timeout: to, timeoutMsg: mess });
     }
+
+    //-----------------------------------------------------------
+    // IMAGE COMPARISON METHODS
+    //-----------------------------------------------------------
+
+    /**
+     * Compare a screenshot taken with a reference image and check for differences.
+     * @param {string} referenceImagePath | Path to the reference image for comparison.
+     * @param {string} tempScreenshotPath | Path to temporarily store the captured screenshot.
+     * @param {number} threshold | Maximum acceptable difference percentage (default is 1.0).
+     */
+    protected async compareScreenshotWithReference(referenceImagePath: string, tempScreenshotPath: string, threshold: number = 1.0): Promise<void> {
+        try {
+            // Take screenshot
+            const screenshot = await browser.takeScreenshot();
+            fs.writeFileSync(tempScreenshotPath, Buffer.from(screenshot, 'base64'));
+
+            // Compare screenshots
+            const diffPercentage = isImagesPixelsMatch(referenceImagePath, tempScreenshotPath, tempScreenshotPath);
+            fs.unlinkSync(tempScreenshotPath);
+            if (parseFloat(diffPercentage) > threshold) { 
+                throw new Error(`The screenshots don't match. Difference: ${diffPercentage}`) 
+            } else {
+                console.log('Screenshots are matching');
+            }
+        } catch (error) {
+            console.error('Ошибка при сравнении скриншотов:', error);
+        }
+    };
 };

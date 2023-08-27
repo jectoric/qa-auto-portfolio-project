@@ -22,7 +22,7 @@ describe('Google Translate | Text Translate Regression Tests', () => {
         await pageActions.clearAllData();
     });
 
-    it('Text-Transalate-Regression-01 - User should not be able select same languages in Source/Traget fields', async () => {
+    it('Text-Transalate-Regression-01 - User should not be able select same languages in Source/Target fields', async () => {
         await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Ukrainian');
         await selectLanguagePage.checkSelectedLanguage(tabName, 'To', 'English');
     });
