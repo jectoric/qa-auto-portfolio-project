@@ -17,10 +17,10 @@ describe('Google Translate | Tabs UI Regression Tests', () => {
     });
 
     testData.tabsTests.forEach((testDataItem) => {
-        const { testName, tabName, referenceImagePath, tempScreenshotPath } = testDataItem;
+        const { testName, tabName, referenceImagePath, tempScreenshotPath, diffScreenshotPath } = testDataItem;
         it(testName, async () => {
             await commonPage.clickGoogleTransalteTab(tabName);
-            await pageActions.compareScreenshotWithReference(referenceImagePath, tempScreenshotPath);
+            await pageActions.compareScreenshotWithReference(referenceImagePath, tempScreenshotPath, diffScreenshotPath);
         });
     });
 });

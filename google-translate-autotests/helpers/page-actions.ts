@@ -264,15 +264,15 @@ export class PageActions {
      * @param {number} threshold | Maximum acceptable difference percentage (default is 1.0).
      * @param {number} waitBeforeScreenshot | Wait time before taking screenshot
      */
-    public async compareScreenshotWithReference(referenceImagePath: string, tempScreenshotPath: string, threshold: number = 1.0, waitBeforeScreenshot: number = 2000): Promise<void> {
+    public async compareScreenshotWithReference(referenceImagePath: string, tempScreenshotPath: string, diffScreenshotPath: string, threshold: number = 0.01, waitBeforeScreenshot: number = 2000): Promise<void> {
         try {
             // Take screenshot
             await browser.pause(waitBeforeScreenshot);
             const screenshot = await browser.takeScreenshot();
-            fs.writeFileSync(tempScreenshotPath, Buffer.from(screenshot, 'base64'));
+            fs.writeFileSync(tempScreenshotPath, Buffer.from(screenshot, 'base64'), 'base64');
 
             // Compare images and delete tempScreenshot
-            const diffPercentage = isImagesPixelsMatch(referenceImagePath, tempScreenshotPath, tempScreenshotPath);
+            const diffPercentage = isImagesPixelsMatch(referenceImagePath, tempScreenshotPath, diffScreenshotPath);
             fs.unlinkSync(tempScreenshotPath);
             if (parseFloat(diffPercentage) > threshold) { 
                 throw new Error(`The screenshots don't match. Difference: ${diffPercentage}`) 
@@ -280,7 +280,7 @@ export class PageActions {
                 console.log('Screenshots are matching');
             }
         } catch (error) {
-            console.error('Ошибка при сравнении скриншотов:', error);
+            throw new Error('Screenshots comparison error:', error);
         }
     };
 };
