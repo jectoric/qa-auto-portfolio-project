@@ -1,27 +1,28 @@
 # qa-auto-portfolio-project
 
-**qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) site and works on the WebdriverIO automation framework. Autotests check the functionality of a site on Chrome and Firefox browsers. <!--In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)-->
+**qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) site and works on the WebdriverIO automation framework. Autotests check the functionality of a site on Chrome and Firefox browsers. In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)
 
 > [!NOTE]
 > The project was created to demonstrate my test automation skills, there was no goal to cover all functionality and views of Google Translate
 
 ## Features 
-- Executing autotests separatly by suite name (Smoke or Regression<!-- /UI Comparison-->)
+- Executing autotests separatly by suite name (Smoke or Regression/UI Comparison)
 - Running autotests on Chrome and Firefox browsers
-<!-- - UI Comparison autotests that allows to compare current view with predefined scrennshot 
-ADD UI COMPARISON PHOTO
-- Remote autotests run on CircleCI -->
+- UI Comparison autotests that allows to compare current view with predefined scrennshot 
+<!--- Remote autotests run on CircleCI -->
 
 ## Demo
+- **Autotests run example**
 <img src="./google-translate-autotests/demo/demo.gif" width=1000/>
-<!-- add presentation and ui regression screen -->
+- **UI Comaprison diff screenshot example**
+<img src="./google-translate-autotests/demo/diff-scrennshot-demo.png" width=1000/>
 
 ## Structure
 - Folder with function test cases `google-translate-autotests/tests/functional-autotests`
+- Folder with non-function test cases (UI Comparison) `google-translate-autotests/tests/non-functional-autotests`
 - Folder with page objects `google-translate-autotests/page-objects`
 - Folder with helpers `google-translate-autotests/helpers`
 - Folder with test data (files, images) `google-translate-autotests/data`
-<!-- - Folder with non-function test cases `` -->
 
 ## Setup project and run autotests locally ⚙️
 ### 1. Precondition:
@@ -57,13 +58,16 @@ wdio run ./wdio.conf_chrome.js --suite=smoke_tests
 ```
 wdio run ./wdio.conf_firefox.js --suite=regression_tests
 ```
-<!-- ADD UI REGRESSION LATER -->
+- Run **UI Comparison** tests for **Chrome** - script `run-ui-comparison-test-cases-chrome` or command
+```
+wdio run ./wdio.conf_chrome.js --suite=ui_comparison_tests
+```
 
 ## Built With 🛠
 - [TypeScript language](https://www.typescriptlang.org/) - Used to write automation test cases.
 - [NPM](https://www.npmjs.com/) - For managing project's dependencies, including WebdriverIO and any other libraries required for the automation.
 - [WebdriverIO](https://webdriver.io/uk/) - Serves as the core automation framework for the project, enabling the simulation of user interactions and testing scenarios on the web application.
-<!-- - [Pixelmatch library](https://github.com/mapbox/pixelmatch) - is utilized for visual regression testing. It allows to compare screenshots of your app UI, detecting any unexpected visual differences. -->
+- [Pixelmatch library](https://github.com/mapbox/pixelmatch) - is utilized for visual regression testing. It allows to compare screenshots of your app UI, detecting any unexpected visual differences.
 
 ## License 📋
 
