@@ -14,6 +14,7 @@
 ## Demo
 - **Autotests run example**
 <img src="./google-translate-autotests/demo/demo.gif" width=1000/>
+
 - **UI Comaprison diff screenshot example**
 <img src="./google-translate-autotests/demo/diff-scrennshot-demo.png" width=1000/>
 
