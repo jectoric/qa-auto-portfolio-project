@@ -11,7 +11,7 @@ export class DocumentTranslatePage extends PageActions {
     //-----------------------------------------------------------
 
     private tabText(checkText: string) {
-        return $(`//div[text()="${checkText}"]`);
+        return $(`//div[contains(., "${checkText}")]`);
     }
 
     private get learnMoreButton() {
@@ -31,7 +31,7 @@ export class DocumentTranslatePage extends PageActions {
     }
 
     private get documentUploadInput() {
-        return $('//div[text()="Choose a document"]/ancestor::div[1]//input[@name="file"]');
+        return $('(//input[@name="file"])[1]');
     }
 
     private translateButton(buttonText: string) {
