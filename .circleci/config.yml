@@ -1,4 +1,10 @@
 version: 2.1
+parameters:
+  SUITE_NAME:
+    type: string
+  BROWSER:
+    type: string
+
 jobs:
   build:
     docker:
@@ -12,5 +18,3 @@ jobs:
           name: Run tests
           command: |
             npm run run-specific-test-suite $SUITE_NAME $BROWSER
-      - store_artifacts:
-          path: ./screenshots
