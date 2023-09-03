@@ -22,7 +22,7 @@ jobs:
             node-version: 18.13.0
         - name: Install
           run: npm install
-        - name: Test
+        - name: Regression Test Chrome 
           run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
         - uses: actions/upload-artifact@v1
           if: failure()

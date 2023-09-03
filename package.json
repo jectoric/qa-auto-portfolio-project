@@ -6,7 +6,6 @@
     "main": "index.js",
     "scripts": {
         "run-all-test-cases-chrome": "wdio run ./wdio.conf_chrome.js",
-        "run-specific-test-suite": "wdio run ./wdio.conf_$BROWSER.js --suite=$SUITE_NAME",
         "run-smoke-test-cases-chrome": "wdio run ./wdio.conf_chrome.js --suite=smoke_tests",
         "run-regression-test-cases-chrome": "wdio run ./wdio.conf_chrome.js --suite=regression_tests",
         "run-all-test-cases-firefox": "wdio run ./wdio.conf_chrome.js",
