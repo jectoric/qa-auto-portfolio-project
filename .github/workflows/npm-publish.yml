@@ -12,28 +12,16 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    runs-on: macos-latest
     steps:
         - name: Checkout
-          uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
+          uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
           with:
             node-version: 18.13.0
         - name: Install
           run: npm install
-        - name: Debug
-          run: |
-            echo "Environment Variables:"
-            env
-
-            echo "Chrome Version:"
-            google-chrome --version
-
-            echo "ChromeDriver Version:"
-            chromedriver --version
-
-            ls -l /opt/google/chrome/chrome
-            ls -l /path/to/chromedriver
         - name: Test
           run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
         - uses: actions/upload-artifact@v1
