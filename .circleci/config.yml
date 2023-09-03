@@ -3,9 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:14
-    environment:
-      SUITE_NAME: $SUITE_NAME
-      BROWSER: $BROWSER
     steps:
       - checkout
       - run:
@@ -14,12 +11,6 @@ jobs:
       - run:
           name: Run tests
           command: |
-            npm run run-specific-test-suite
+            npm run run-specific-test-suite $SUITE_NAME $BROWSER
       - store_artifacts:
           path: ./screenshots
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
