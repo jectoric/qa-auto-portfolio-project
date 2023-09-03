@@ -1,0 +1,20 @@
+version: 1.0
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          name: Install Chrome
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run tests
+          command: npm run run-specific-test-suite $SUITE_NAME $BROWSER 
+      - store_artifacts:
+          path: ./screenshots
