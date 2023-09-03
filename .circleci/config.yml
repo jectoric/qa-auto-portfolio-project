@@ -1,20 +1,11 @@
 version: 2.1
-
-parameters:
-  SUITE_NAME:
-    type: string
-    default: regression_tests
-  BROWSER:
-    type: string
-    default: chrome
-
 jobs:
   build:
     docker:
       - image: circleci/node:14
     environment:
-      SUITE_NAME: << parameters.SUITE_NAME >>
-      BROWSER: << parameters.BROWSER >>
+      SUITE_NAME: $SUITE_NAME
+      BROWSER: $BROWSER
     steps:
       - checkout
       - run:
@@ -22,6 +13,17 @@ jobs:
           command: npm install
       - run:
           name: Run tests
-          command: npm run run-specific-test-suite
+          command: |
+            npm run run-specific-test-suite
       - store_artifacts:
           path: ./screenshots
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          branch: master
+          parameters:
+            SUITE_NAME: $SUITE_NAME
+            BROWSER: $BROWSER
