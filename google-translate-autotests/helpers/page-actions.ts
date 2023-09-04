@@ -1,6 +1,7 @@
 'use strict';
 import * as fs from 'fs';
 import { isImagesPixelsMatch } from './image-comparison';
+import allure from '@wdio/allure-reporter'
 const TIMEOUT = 10000;
 const WAIT_FOR_SCRIPT: number = 500;
 
@@ -274,8 +275,13 @@ export class PageActions {
             // Compare images and delete tempScreenshot
             const diffPercentage = isImagesPixelsMatch(referenceImagePath, tempScreenshotPath, diffScreenshotPath);
             fs.unlinkSync(tempScreenshotPath);
-            if (parseFloat(diffPercentage) > threshold) { 
-                throw new Error(`The screenshots don't match. Difference: ${diffPercentage}`) 
+
+            // Create an Allure step to attach the diff screenshot
+            allure.startStep("Compare Screenshots");
+            if (parseFloat(diffPercentage) > threshold) {
+                allure.createAttachment(fs.readFileSync(diffScreenshotPath));
+                allure.endStep("failed");
+                throw new Error(`The screenshots don't match. Difference: ${diffPercentage}`)
             } else {
                 console.log('Screenshots are matching');
             }

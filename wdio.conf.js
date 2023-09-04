@@ -23,7 +23,11 @@ exports.config = {
     connectionRetryCount: 3,
     services: ['chromedriver'],
     framework: 'jasmine',
-    reporters: ['spec'],
+    reporters: ['spec', ['allure', {
+        outputDir: './allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+    }]],
     jasmineOpts: {
         capabilities: [{
             browserName: 'chrome',
@@ -48,6 +52,13 @@ exports.config = {
         }
     },
 
+    afterTest: async function (test, context, { error }) {
+        if (error) {
+            const screenshot = await browser.takeScreenshot();
+            allure.addAttachment('Screenshot', screenshot, 'image/png');
+        }
+    },
+
     onComplete: function () {
         function rmdir(dir) {
             var list = fs.readdirSync(dir);
@@ -64,5 +75,25 @@ exports.config = {
             fs.rmdirSync(dir);
         }
         rmdir(downloadDir)
-    }
+
+        // Generate Allure report
+        const reportError = new Error('Could not generate Allure report')
+        const generation = allure(['generate', 'allure-results', '--clean'])
+        return new Promise((resolve, reject) => {
+            const generationTimeout = setTimeout(
+                () => reject(reportError),
+                5000)
+
+            generation.on('exit', function (exitCode) {
+                clearTimeout(generationTimeout)
+
+                if (exitCode !== 0) {
+                    return reject(reportError)
+                }
+
+                console.log('Allure report successfully generated')
+                resolve()
+            })
+        })
+    },
 }

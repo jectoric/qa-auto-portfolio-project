@@ -4,3 +4,10 @@
 
 # files
 /tempDownload
+
+#images
+*.png
+
+#reports
+/allure-results
+/allure-report
