@@ -8,10 +8,11 @@
             "expect-webdriverio",
             "@wdio/jasmine-framework",
             "mocha",
+            "@wdio/allure-reporter" 
         ],
         "target": "es2022"
     },
     "include": [
-        "./google-translate-autotests/**/**/*.ts",
+        "./google-translate-autotests/**/**/*.ts"
     ]
 }
