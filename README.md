@@ -6,18 +6,34 @@
 > [!NOTE]
 > The project was created to demonstrate my test automation skills, there was no goal to cover all functionality and views of Google Translate
 
+## Table of Contents
+
+- [Features](#features)
+- [Features Demonstration](#features-demonstration)
+- [Structure](#structure)
+- [Setup project and run autotests locally ⚙️](#setup-project-and-run-autotests-locally-⚙️)
+- [Built With 🛠](#built-with-🛠)
+- [License 📋](#license-📋)
+
 ## Features 
 - Executing autotests separatly by suite name (Smoke or Regression/UI Comparison)
 - Running autotests on Chrome and Firefox browsers
 - UI Comparison autotests that allows to compare current view with predefined scrennshot 
-<!--- Remote autotests run on CircleCI -->
+- Allure report for display of test results
+<!--- Remote autotests run on Github Actions -->
 
-## Demo
+## Features Demonstration
 - **Autotests run example**
+
 <img src="./google-translate-autotests/demo/demo.gif" width=1000/>
 
 - **UI Comaprison diff screenshot example**
+
 <img src="./google-translate-autotests/demo/diff-scrennshot-demo.png" width=1000/>
+
+- **Allure report example**
+
+<img src="./google-translate-autotests/demo/allure-report-demo.png" width=1000/>
 
 ## Structure
 - Folder with function test cases `google-translate-autotests/tests/functional-autotests`
@@ -70,6 +86,7 @@ wdio run ./wdio.conf_chrome.js --suite=ui_comparison_tests
 - [NPM](https://www.npmjs.com/) - For managing project's dependencies, including WebdriverIO and any other libraries required for the automation.
 - [WebdriverIO](https://webdriver.io/uk/) - Serves as the core automation framework for the project, enabling the simulation of user interactions and testing scenarios on the web application.
 - [Pixelmatch library](https://github.com/mapbox/pixelmatch) - is utilized for visual regression testing. It allows to compare screenshots of your app UI, detecting any unexpected visual differences.
+- [Allure Report](https://webdriver.io/docs/allure-reporter/) - used for generating detailed test reports.
 
 ## License 📋
 

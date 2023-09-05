@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
+import allure from '@wdio/allure-reporter';
 import { CommonPage } from './common.page';
 import { PageActions } from '../helpers/page-actions';
+
 const commonPage: CommonPage = new CommonPage();
 
 export class DocumentTranslatePage extends PageActions {
@@ -51,59 +53,79 @@ export class DocumentTranslatePage extends PageActions {
     //-----------------------------------------------------------
 
     public async checkTabText(checkTextArray: string[], state: string = 'Visible') {
-        for (const text of checkTextArray) {
-            state === 'Visible'
-                ? await this.waitElementVisible(this.tabText(text))
-                : await this.waitElementInvisible(this.tabText(text))
-        }
+        await allure.step(`When I check ${state} tab text is "${checkTextArray}"`, async () => {
+            for (const text of checkTextArray) {
+                state === 'Visible'
+                    ? await this.waitElementVisible(this.tabText(text))
+                    : await this.waitElementInvisible(this.tabText(text))
+            }
+        });
     }
 
     public async clickLearnMoreButton(checkLink: string) {
-        await this.waitClick(this.learnMoreButton);
-        await commonPage.checkNextTabLink(checkLink);
+        await allure.step(`When I click on "Learn More" button and check link "${checkLink}"`, async () => {
+            await this.waitClick(this.learnMoreButton);
+            await commonPage.checkNextTabLink(checkLink);
+        });
     }
 
     public async clickPoweredByButton(checkLink: string) {
-        await this.waitElementVisible(this.poweredByText);
-        await this.waitClick(this.poweredByLink);
-        await commonPage.checkNextTabLink(checkLink);
+        await allure.step(`When I click on "Powered By" button and check link "${checkLink}"`, async () => {
+            await this.waitElementVisible(this.poweredByText);
+            await this.waitClick(this.poweredByLink);
+            await commonPage.checkNextTabLink(checkLink);
+        });
     }
 
     public async uploadFile(fileName: string) {
-        const path = require('path');
-        const filePath = path.join(__dirname, `../data/${fileName}`);
-        await this.waitElementVisible(this.browseComputorLabel);
-        await this.documentUploadInput.setValue(filePath);
+        await allure.step(`When I upload file with name "${fileName}"`, async () => {
+            const path = require('path');
+            const filePath = path.join(__dirname, `../data/${fileName}`);
+            await this.waitElementVisible(this.browseComputorLabel);
+            await this.documentUploadInput.setValue(filePath);
+        });
     }
 
     public async uploadFileAndCheck(fileName: string, fileSize: string) {
-        await this.uploadFile(fileName);
-        await this.checkTabText([fileName, fileSize]);
+        await allure.step(`When I upload file with name "${fileName}" and check size is "${fileSize}"`, async () => {
+            await this.uploadFile(fileName);
+            await this.checkTabText([fileName, fileSize]);
+        });
     }
 
     public async removeFile(fileName: string, fileSize: string) {
-        await this.waitClick(this.clearFileButton);
-        await this.checkTabText([fileName, fileSize], 'Invisible');
+        await allure.step(`When I remove file with name "${fileName}" and size "${fileSize}"`, async () => {
+            await this.waitClick(this.clearFileButton);
+            await this.checkTabText([fileName, fileSize], 'Invisible');
+        });
     }
 
     public async waitForDocumentTabButton(buttonName: string) {
-        await this.waitElementVisible(this.translateButton(buttonName));
+        await allure.step(`When I wait for document tab button "${buttonName}"`, async () => {
+            await this.waitElementVisible(this.translateButton(buttonName));
+        });
     }
 
     public async clickDocumentTabButton(buttonName: string) {
-        await this.waitForDocumentTabButton(buttonName);
-        await this.waitClick(this.translateButton(buttonName));
+        await allure.step(`When I click document tab button "${buttonName}"`, async () => {
+            await this.waitForDocumentTabButton(buttonName);
+            await this.waitClick(this.translateButton(buttonName));
+        });
     }
 
     public async checkDownloadedFile(fileName: string, fileTextCheck: string) {
-        const filePath = path.join(global.downloadDir, fileName);
-        await this.waitForFileExists(filePath);
-        const fileContents = fs.readFileSync(filePath);
-        assert.ok(fileContents.includes(fileTextCheck), `The file contents do not includes "${fileTextCheck}`);
+        await allure.step(`When I check downloaded file "${fileName}" contains text "${fileTextCheck}"`, async () => {
+            const filePath = path.join(global.downloadDir, fileName);
+            await this.waitForFileExists(filePath);
+            const fileContents = fs.readFileSync(filePath);
+            assert.ok(fileContents.includes(fileTextCheck), `The file contents do not includes "${fileTextCheck}`);
+        });
     }
 
     public async checkInvalidFileAlert() {
-        await this.waitElementVisible(this.invalidFileAlertButton);
-        await this.waitClick(this.invalidFileAlertButton);
+        await allure.step(`When I check "Invalid File" alert`, async () => {
+            await this.waitElementVisible(this.invalidFileAlertButton);
+            await this.waitClick(this.invalidFileAlertButton);
+        });
     }
 }

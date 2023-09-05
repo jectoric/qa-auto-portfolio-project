@@ -1,5 +1,7 @@
+import allure from '@wdio/allure-reporter';
 import { PageActions } from '../helpers/page-actions';
 import { WebsitesTranslatePage } from '../page-objects/websitesTranslate.page';
+
 const websitesTranslatePage: WebsitesTranslatePage = new WebsitesTranslatePage();
 
 export class TextTranslatePage extends PageActions {
@@ -64,68 +66,90 @@ export class TextTranslatePage extends PageActions {
     //-----------------------------------------------------------
 
     public async insertSourceText(text: string) {
-        await this.waitClearSendKeys(this.insertSourceTextField, text);
+        await allure.step(`When I insert source text "${text}"`, async () => {
+            await this.waitClearSendKeys(this.insertSourceTextField, text);
+        });
     }
 
     public async checkTranslatedText(text: string) {
-        let arrayToCheck = text.split(' ');
-        for (let i = 0; i < arrayToCheck.length; i++) {
-            await this.waitElementVisible(this.getTransaltedText(arrayToCheck[i]));
-        }
+        await allure.step(`When I check translated text "${text}"`, async () => {
+            let arrayToCheck = text.split(' ');
+            for (let i = 0; i < arrayToCheck.length; i++) {
+                await this.waitElementVisible(this.getTransaltedText(arrayToCheck[i]));
+            }
+        });
     }
 
     public async checkTextCorrection(message: string, suggestedValiant: string) {
-        message === 'Translate from:'
-            ? await this.waitElementVisible(this.incorrectLanguageCorrection(message, suggestedValiant))
-            : await this.waitElementVisible(this.textCorrection(message, suggestedValiant))
+        await allure.step(`When I check text correction message "${message}: ${suggestedValiant}"`, async () => {
+            message === 'Translate from:'
+                ? await this.waitElementVisible(this.incorrectLanguageCorrection(message, suggestedValiant))
+                : await this.waitElementVisible(this.textCorrection(message, suggestedValiant))
+        });
     }
 
     public async clickTextCorrectionOption(message: string, correctText: string) {
-        await this.waitClick(this.textCorrectionButton(message));
-        await this.waitElementInvisible(this.textCorrectionButton(message));
-        await this.waitElementPresent(this.getSourceText(correctText));
+        await allure.step(`When I click text correction option "${message}: ${correctText}"`, async () => {
+            await this.waitClick(this.textCorrectionButton(message));
+            await this.waitElementInvisible(this.textCorrectionButton(message));
+            await this.waitElementPresent(this.getSourceText(correctText));
+        });
     }
 
     public async clickClearSourceText(checkText: string) {
-        await this.waitClick(this.clearSourceText);
-        await this.waitElementInvisible(this.getSourceText(checkText));
+        await allure.step(`When I click clear source text ${checkText}"`, async () => {
+            await this.waitClick(this.clearSourceText);
+            await this.waitElementInvisible(this.getSourceText(checkText));
+        });
     }
 
     public async checkCharactersLimit(numberOfUsed: string) {
-        await this.waitElementVisible(this.charactersLimit(numberOfUsed));
+        await allure.step(`When I check characters limit is ${numberOfUsed}"`, async () => {
+            await this.waitElementVisible(this.charactersLimit(numberOfUsed));
+        });
     }
 
     public async clickCopyButton() {
-        await this.waitClick(this.copyTranslationButton);
-        await this.waitElementVisible(this.textCopiedAlert);
+        await allure.step(`When I click copy button`, async () => {
+            await this.waitClick(this.copyTranslationButton);
+            await this.waitElementVisible(this.textCopiedAlert);
+        });
     }
 
     public async insertCopiedText(checkPastedText: string) {
-        await this.pasteTextFromClipboard(this.insertSourceTextField);
-        await this.waitElementPresent(this.getSourceText(checkPastedText));
+        await allure.step(`When I insert copied text`, async () => {
+            await this.pasteTextFromClipboard(this.insertSourceTextField);
+            await this.waitElementPresent(this.getSourceText(checkPastedText));
+        });
     }
 
     public async checkTranscriptionRowText(checkText: string) {
-        await this.waitElementPresent(this.getTranscriptionRow(checkText));
+        await allure.step(`When I check transcription row text "${checkText}"`, async () => {
+            await this.waitElementPresent(this.getTranscriptionRow(checkText));
+        });
     }
 
     public async clickTranscriptionRowButton(fieldName: string, buttonName: string) {
-        let number;
-        switch (fieldName) {
-            case 'Source':
-                number = 1;
-                break;
-            case 'Target':
-                number = 2;
-                break;
-        }
-        await this.waitClick(this.transcriptionRowButton(buttonName, number));
-        await this.waitElementInvisible(this.transcriptionRowButton(buttonName, number));
+        await allure.step(`When I click transcription row button "${buttonName}"`, async () => {
+            let number;
+            switch (fieldName) {
+                case 'Source':
+                    number = 1;
+                    break;
+                case 'Target':
+                    number = 2;
+                    break;
+            }
+            await this.waitClick(this.transcriptionRowButton(buttonName, number));
+            await this.waitElementInvisible(this.transcriptionRowButton(buttonName, number));
+        });
     }
 
     public async checkTargetFieldLink(targetLink: string, transaltedLink: string) {
-        await this.waitElementVisible(this.targetFieldLink(targetLink));
-        await this.waitClick(this.targetFieldLink(targetLink));
-        await websitesTranslatePage.openTranslatedWebsite(transaltedLink);
+        await allure.step(`When I check target field link is "${targetLink}"`, async () => {
+            await this.waitElementVisible(this.targetFieldLink(targetLink));
+            await this.waitClick(this.targetFieldLink(targetLink));
+            await websitesTranslatePage.openTranslatedWebsite(transaltedLink);
+        });
     }
 }

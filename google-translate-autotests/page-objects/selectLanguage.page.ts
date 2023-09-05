@@ -1,5 +1,7 @@
+import allure from '@wdio/allure-reporter';
 import { CommonPage } from './common.page';
 import { PageActions } from '../helpers/page-actions';
+
 const commonPage: CommonPage = new CommonPage();
 
 export class SelectLanguagePage extends PageActions {
@@ -53,29 +55,39 @@ export class SelectLanguagePage extends PageActions {
     //-----------------------------------------------------------
 
     public async checkSelectedLanguage(tabName: string, dropdownType: string, language: string, color: string = '#1a73e8') {
-        await this.waitElementVisible(this.selectedLanguage(tabName, dropdownType, language));
-        await commonPage.checkElementColor(this.selectedLanguage(tabName, dropdownType, language), color);
+        await allure.step(`When I check selected language is "${language}" on tab "${tabName}"`, async () => {
+            await this.waitElementVisible(this.selectedLanguage(tabName, dropdownType, language));
+            await commonPage.checkElementColor(this.selectedLanguage(tabName, dropdownType, language), color);
+        });
     }
 
     public async clickLanguageTab(tabName: string, dropdownType: string, language: string) {
-        await this.waitClick(this.selectLanguageTab(tabName, dropdownType, language));
-        await this.checkSelectedLanguage(tabName, dropdownType, language, '#174ea6');
+        await allure.step(`When I select language "${language}" on tab "${tabName}"`, async () => {
+            await this.waitClick(this.selectLanguageTab(tabName, dropdownType, language));
+            await this.checkSelectedLanguage(tabName, dropdownType, language, '#174ea6');
+        });
     }
 
     public async clickSwapLanguages(tabName: string) {
-        await this.waitClick(this.swapLanguagesButton(tabName));
+        await allure.step(`When I click on the swap languages tab`, async () => {
+            await this.waitClick(this.swapLanguagesButton(tabName));
+        });
     }
 
     public async searchAndSelectLanguage(tabName: string, dropdownType: string, language: string) {
-        await this.waitClick(this.openLanguagesDropdown(tabName, dropdownType));
-        await this.waitClearSendKeys(this.searchLanguagesInput(tabName, dropdownType), language);
-        await this.waitClick(this.searchLanguageOption(language));
-        await this.waitElementIsNotPresent(this.searchLanguageOption(language));
-        await this.checkSelectedLanguage(tabName, dropdownType, language);
+        await allure.step(`When I search and select language "${language}" on tab "${tabName}"`, async () => {
+            await this.waitClick(this.openLanguagesDropdown(tabName, dropdownType));
+            await this.waitClearSendKeys(this.searchLanguagesInput(tabName, dropdownType), language);
+            await this.waitClick(this.searchLanguageOption(language));
+            await this.waitElementIsNotPresent(this.searchLanguageOption(language));
+            await this.checkSelectedLanguage(tabName, dropdownType, language);
+        });
     }
 
     public async selectFromToLanguages(tabName: string, fromLanguage: string, toLanguage: string) {
-        await this.searchAndSelectLanguage(tabName, 'From', fromLanguage);
-        await this.searchAndSelectLanguage(tabName, 'To', toLanguage);
+        await allure.step(`When I select translate from "${fromLanguage}" to "${toLanguage}" on "${tabName}" tab`, async () => {
+            await this.searchAndSelectLanguage(tabName, 'From', fromLanguage);
+            await this.searchAndSelectLanguage(tabName, 'To', toLanguage);
+        });
     }
 }
