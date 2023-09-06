@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  regression-test:
     timeout-minutes: 5
     runs-on: macos-latest
     steps:
@@ -19,13 +19,14 @@ jobs:
             node-version: 18.13.0
         - name: Install Dependecies
           run: npm install
-        - name: Run UI Comparison Tests Chrome 
-          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-ui-comparison-test-cases-chrome
+        - name: Run Regression Tests Chrome 
+          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
         - name: Generate Allure Report
           run: |
-            npm install -g allure-commandline # Install Allure CLI
+            npm install -g allure-commandline 
             allure generate --clean app/build/reports/allure -o allure-report
-            mv allure-report $GITHUB_WORKSPACE # Move the report to the workspace
+            mv allure-report $GITHUB_WORKSPACE
+          continue-on-error: true 
         - name: Upload Allure Report
           uses: actions/upload-artifact@v2
           with:
