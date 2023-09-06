@@ -9,42 +9,165 @@ on:
 
 jobs:
   regression-tests:
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: macos-latest
     steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        
-        - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.13.0
+
+      - name: Install Dependecies
+        run: npm install
+
+      - name: Run Regression Tests Chrome
+        run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
+
+      - name: Get Allure history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      # Uploading Allure log to artifacts
+      - name: Uploading Allure log to artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Allure log
+          path: ${{ github.workspace }}/appium.log
+
+          # Uploading "allure-results" folder to artifacts
+      - name: Uploading "allure-results" folder to artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: allure-results
+          path: ${{ github.workspace }}/allure-results
+
+# # # # # # # # # # # # # # # # # # # # # # # ALLURE CONFIGURING # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+  generate_report:
+      timeout-minutes: 60
+      name: Generate Allure Report
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}${{ github.run_number }}
+      runs-on: ubuntu-latest
+      if: always()
+      needs: [regression-tests]
+      steps:
+        # Configuring Node
+        - name: Setup Node
+          uses: actions/setup-node@v3
+          if: always()
           with:
-            node-version: 18.13.0
-        
-        - name: Install Dependecies
-          run: npm install
-        
-        - name: Run Regression Tests Chrome 
-          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
-        
-        - name: Get Allure history
+            node-version: 16
+
+        # Download "allure-results" from artifacts
+        - name: Download Artifacts
+          uses: actions/download-artifact@v3
+          if: always()
+          with:
+            name: allure-results
+            path: allure-results
+
+        # Checking out to "gh-pages" branch
+        - name: Checkout to "gh-pages" branch
           uses: actions/checkout@v3
           if: always()
-          continue-on-error: true
           with:
             ref: gh-pages
             path: gh-pages
 
-        - name: Allure report action
+        # Generating Allure Results
+        - name: Generating Allure Results of current test run
           uses: simple-elf/allure-report-action@master
           if: always()
+          id: allure-report
           with:
-            allure_results: ${{ vars.ALLURE_RESULTS_PATH }}
+            allure_results: allure-results
+            gh_pages: gh-pages
+            allure_report: allure-report
             allure_history: allure-history
-            keep_reports: 2
 
-        - name: Deploy Allure report to GitHub Pages
-          if: always() 
-          uses: peaceiris/actions-gh-pages@v3
+        # Uploading "allure-results" folder to artifacts
+        - name: Uploading "allure-results" folder to artifacts
+          uses: actions/upload-artifact@v3
+          if: always()
           with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_branch: gh-pages
-            publish_dir: allure-history
+            name: ${{ github.run_number }}
+            path: ${{ github.workspace }}/allure-history/${{ github.run_number }}
+
+        # Uploading Allure history to artifacts
+        - name: Uploading Allure history to artifacts
+          uses: actions/upload-artifact@v3
+          if: always()
+          with:
+            name: allure-history
+            path: ${{ github.workspace }}/allure-history/last-history
+
+        # Creating a new "allure-results" directory
+        - name: Creating a new test result directory
+          if: always()
+          run: mkdir ${{ github.workspace }}/gh-pages/${{ github.run_number }}
+
+        # Inserting "allure-results" result
+        - name: Inserting test run result to "gh-pages" branch
+          uses: actions/download-artifact@v3
+          if: always()
+          with:
+            name: ${{ github.run_number }}
+            path: ${{ github.workspace }}/gh-pages/${{ github.run_number }}
+
+        # Removing previous Allure History results
+        - name: Removing old Allure History results
+          if: always()
+          run: rm -rf ${{ github.workspace }}/gh-pages/last-history
+
+        # Creating a new Allure History directory
+        - name: Creating a new allure history directory
+          if: always()
+          run: mkdir ${{ github.workspace }}/gh-pages/last-history
+
+        # Inserting new Allure history result
+        - name: Inserting Allure History to "gh-pages" branch
+          uses: actions/download-artifact@v3
+          if: always()
+          with:
+            name: allure-history
+            path: ${{ github.workspace }}/gh-pages/last-history
+
+        # Publishing changes to "gh-pages" branch
+        - name: Commit changes and push
+          if: always()
+          run: |
+            cd ${{ github.workspace }}/gh-pages
+            git config --global user.email "maksymkuznetsov@test.com"
+            git config --global user.name "UploadBOT"
+            git add .
+            git commit -m "Automated deployment"
+            git push origin gh-pages
+
+        # Configuring pages
+        - name: Setup Pages
+          if: always()
+          uses: actions/configure-pages@v3
+
+        # TODO: Should check if this required
+        # Uploading "gh-pages" artifacts
+        - name: Upload artifact
+          if: always()
+          uses: actions/upload-pages-artifact@v1
+          with:
+            path: gh-pages
+
+        # Deploying GitHub page of current test run
+        - name: Deploy to GitHub Pages
+          if: always()
+          id: deployment
+          uses: actions/deploy-pages@v2
