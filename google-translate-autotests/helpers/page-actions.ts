@@ -282,7 +282,7 @@ export class PageActions {
                 console.log('Screenshots are matching');
             }
         } catch (error) {
-            throw new Error('Screenshots comparison error:', error);
+            throw new Error(`Screenshots comparison error: ${error}`);
         }
     };
 };

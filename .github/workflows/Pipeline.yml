@@ -1,4 +1,3 @@
-
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
@@ -6,9 +5,7 @@ name: webdriverio-ci
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   test:
@@ -16,17 +13,21 @@ jobs:
     runs-on: macos-latest
     steps:
         - name: Checkout
-          uses: actions/checkout@v2
-        - uses: actions/setup-node@v2
+          uses: actions/checkout@v4
+        - uses: actions/setup-node@v3
           with:
             node-version: 18.13.0
-        - name: Install
+        - name: Install Dependecies
           run: npm install
-        - name: Regression Tests Chrome 
-          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
-        - name: Upload test reports
-          if: always()
+        - name: Run UI Comparison Tests Chrome 
+          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-ui-comparison-test-cases-chrome
+        - name: Generate Allure Report
+          run: |
+            npm install -g allure-commandline # Install Allure CLI
+            allure generate --clean app/build/reports/allure -o allure-report
+            mv allure-report $GITHUB_WORKSPACE # Move the report to the workspace
+        - name: Upload Allure Report
           uses: actions/upload-artifact@v2
           with:
-            name: test-reports
-            path: app/build/reports
+            name: allure-report
+            path: $GITHUB_WORKSPACE/allure-report

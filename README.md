@@ -11,9 +11,9 @@
 - [Features](#features)
 - [Features Demonstration](#features-demonstration)
 - [Structure](#structure)
-- [Setup project and run autotests locally ⚙️](#setup-project-and-run-autotests-locally-⚙️)
-- [Built With 🛠](#built-with-🛠)
-- [License 📋](#license-📋)
+- [Setup project and run autotests locally](#setup-project-and-run-autotests-locally)
+- [Built With](#built-with)
+- [License](#license)
 
 ## Features 
 - Executing autotests separatly by suite name (Smoke or Regression/UI Comparison)
@@ -25,15 +25,19 @@
 ## Features Demonstration
 - **Autotests run example**
 
-<img src="./google-translate-autotests/demo/demo.gif" width=1000/>
+<img src="./google-translate-autotests/demo/demo.gif" width=700/>
 
 - **UI Comaprison diff screenshot example**
 
-<img src="./google-translate-autotests/demo/diff-scrennshot-demo.png" width=1000/>
+<img src="./google-translate-autotests/demo/diff-scrennshot-demo.png" width=700/>
 
 - **Allure report example**
 
-<img src="./google-translate-autotests/demo/allure-report-demo.png" width=1000/>
+<img src="./google-translate-autotests/demo/allure-report-demo.png" width=700/>
+
+- **Allure report failed test example**
+
+<img src="./google-translate-autotests/demo/allure-fail-demo.png" width=700/>
 
 ## Structure
 - Folder with function test cases `google-translate-autotests/tests/functional-autotests`
@@ -42,7 +46,7 @@
 - Folder with helpers `google-translate-autotests/helpers`
 - Folder with test data (files, images) `google-translate-autotests/data`
 
-## Setup project and run autotests locally ⚙️
+## Setup project and run autotests locally
 ### 1. Precondition:
 - Installed Chrome browser
 - Installed Firefox browser
@@ -81,14 +85,14 @@ wdio run ./wdio.conf_firefox.js --suite=regression_tests
 wdio run ./wdio.conf_chrome.js --suite=ui_comparison_tests
 ```
 
-## Built With 🛠
+## Built With
 - [TypeScript language](https://www.typescriptlang.org/) - Used to write automation test cases.
 - [NPM](https://www.npmjs.com/) - For managing project's dependencies, including WebdriverIO and any other libraries required for the automation.
 - [WebdriverIO](https://webdriver.io/uk/) - Serves as the core automation framework for the project, enabling the simulation of user interactions and testing scenarios on the web application.
 - [Pixelmatch library](https://github.com/mapbox/pixelmatch) - is utilized for visual regression testing. It allows to compare screenshots of your app UI, detecting any unexpected visual differences.
 - [Allure Report](https://webdriver.io/docs/allure-reporter/) - used for generating detailed test reports.
 
-## License 📋
+## License
 
 ```
 MIT License
