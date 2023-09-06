@@ -8,27 +8,43 @@ on:
   pull_request:
 
 jobs:
-  regression-test:
+  regression-tests:
     timeout-minutes: 5
     runs-on: macos-latest
     steps:
         - name: Checkout
           uses: actions/checkout@v4
+        
         - uses: actions/setup-node@v3
           with:
             node-version: 18.13.0
+        
         - name: Install Dependecies
           run: npm install
+        
         - name: Run Regression Tests Chrome 
           run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run run-regression-test-cases-chrome
-        - name: Generate Allure Report
-          run: |
-            npm install -g allure-commandline 
-            allure generate --clean app/build/reports/allure -o allure-report
-            mv allure-report $GITHUB_WORKSPACE
-          continue-on-error: true 
-        - name: Upload Allure Report
-          uses: actions/upload-artifact@v2
+        
+        - name: Get Allure history
+          uses: actions/checkout@v3
+          if: always()
+          continue-on-error: true
           with:
-            name: allure-report
-            path: $GITHUB_WORKSPACE/allure-report
+            ref: gh-pages
+            path: gh-pages
+
+        - name: Allure report action
+          uses: simple-elf/allure-report-action@master
+          if: always()
+          with:
+            allure_results: ${{ vars.ALLURE_RESULTS_PATH }}
+            allure_history: allure-history
+            keep_reports: 2
+
+        - name: Deploy Allure report to GitHub Pages
+          if: always() 
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_branch: gh-pages
+            publish_dir: allure-history
