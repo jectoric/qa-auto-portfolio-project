@@ -20,8 +20,8 @@ jobs:
       - name: Install Dependecies
         run: npm install
 
-      - name: Run Regression Tests Chrome
-        run: BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} npm run run-regression-test-cases-chrome
+      - name: Run Regression Tests Firefox
+        run: BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} npm run run-regression-test-cases-firefox
 
       - name: Allure history
         uses: actions/checkout@v2
