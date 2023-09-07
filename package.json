@@ -5,6 +5,8 @@
     "description": "This is an example project which shows the level of my automation testing skills",
     "main": "index.js",
     "scripts": {
+        "allure-generate": "allure generate allure-results -o allure-report",
+        "allure-open": "allure open",
         "run-all-test-cases-chrome": "wdio run ./wdio.conf_chrome.js",
         "run-smoke-test-cases-chrome": "wdio run ./wdio.conf_chrome.js --suite=smoke_tests",
         "run-regression-test-cases-chrome": "wdio run ./wdio.conf_chrome.js --suite=regression_tests",
