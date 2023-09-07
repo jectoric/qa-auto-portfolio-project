@@ -21,12 +21,27 @@ jobs:
         run: npm install
 
       - name: Run Regression Tests Chrome
-        run: |
-          BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} npm run run-regression-test-cases-chrome
-          npm run allure-generate
+        run: BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} npm run run-regression-test-cases-chrome
 
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v2
+      - name: Allure history
+        uses: actions/checkout@v2
+        if: always()
         with:
-          name: allure-report
-          path: allure-report
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Allure Publish
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
