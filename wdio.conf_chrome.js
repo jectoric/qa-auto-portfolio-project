@@ -17,7 +17,7 @@ exports.config = merge(wdioConf.config, {
                     prompt_for_download: false,
                     'download.default_directory': downloadDir,
                 },
-                args: ['--window-size=1920,1080', `--disable-gpu`, '--lang=en-us', '--disable-dev-shm-usage', '--no-sandbox'],
+                args: ['--window-size=1920,1080', `--disable-gpu`, '--lang=en-us', '--disable-dev-shm-usage', '--no-sandbox', '--headless'],
             },
         },
     ],
