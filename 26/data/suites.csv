@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Sep 07 19:52:00 GMT 2023","Thu Sep 07 19:52:04 GMT 2023","3465","","Google Translate | Document Translate Regression Tests","","","","Document-Transalate-Regression-03 - User should be able to check ""Powered by"" link",""
+"passed","Thu Sep 07 19:51:55 GMT 2023","Thu Sep 07 19:51:58 GMT 2023","2600","","Google Translate | Document Translate Regression Tests","","","","""before all"" hook",""
+"passed","Thu Sep 07 19:51:58 GMT 2023","Thu Sep 07 19:51:59 GMT 2023","800","","Google Translate | Document Translate Regression Tests","","","","Document-Transalate-Regression-01 - User should not be able to load not permitted file",""
+"passed","Thu Sep 07 19:52:04 GMT 2023","Thu Sep 07 19:52:04 GMT 2023","66","","Google Translate | Document Translate Regression Tests","","","","""after all"" hook",""
+"passed","Thu Sep 07 19:51:59 GMT 2023","Thu Sep 07 19:52:00 GMT 2023","1433","","Google Translate | Document Translate Regression Tests","","","","Document-Transalate-Regression-02 - User should be able to see tab captions and click ""Learn more"" button",""
