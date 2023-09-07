@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const allure = require('allure-commandline')
 global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = {
@@ -73,23 +74,30 @@ exports.config = {
         rmdir(downloadDir)
 
         // Generate Allure report
-        const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'allure-results', '--clean'])
+        const generation = allure(['generate', 'allure-results', '--clean']);
         return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
+            const generationTimeout = setTimeout(() => {
+                console.error('Error: Allure report generation timed out');
+                reject(new Error('Could not generate Allure report within the timeout'));
+            }, 20000);
 
             generation.on('exit', function (exitCode) {
-                clearTimeout(generationTimeout)
+                clearTimeout(generationTimeout);
 
-                if (exitCode !== 0) {
-                    return reject(reportError)
+                if (exitCode === 0) {
+                    console.log('Allure report successfully generated');
+                    resolve();
+                } else {
+                    console.error(`Error: Allure report generation failed with exit code ${exitCode}`);
+                    reject(new Error('Could not generate Allure report'));
                 }
+            });
 
-                console.log('Allure report successfully generated')
-                resolve()
-            })
-        })
+            // Capture any errors during report generation
+            generation.on('error', function (error) {
+                console.error('Error: An error occurred during Allure report generation:', error);
+                reject(new Error('Could not generate Allure report due to an error'));
+            });
+        });
     },
 }
