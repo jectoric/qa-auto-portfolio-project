@@ -29,10 +29,6 @@ exports.config = {
         disableWebdriverScreenshotsReporting: false,
     }]],
     jasmineOpts: {
-        capabilities: [{
-            browserName: 'chrome',
-            maxInstances: 1,
-        }],
         framework: 'Jasmine',
         jasmineOpts: {
             defaultTimeoutInterval: 120000,

@@ -8,6 +8,7 @@ exports.config = merge(wdioConf.config, {
         {
             maxInstances: 1,
             browserName: 'chrome',
+            browserVersion: 'stable',
             acceptInsecureCerts: true,
             'goog:chromeOptions': {
                 prefs: {
