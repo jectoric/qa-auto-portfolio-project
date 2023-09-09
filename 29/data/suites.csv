@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Sep 09 21:41:28 GMT 2023","Sat Sep 09 21:41:28 GMT 2023","92","","Google Translate | Text Translate Regression Tests","","","","""after all"" hook",""
+"failed","Sat Sep 09 21:41:28 GMT 2023","Sat Sep 09 21:41:28 GMT 2023","1","","Google Translate | Text Translate Regression Tests","","","","<unknown test>",""
+"failed","Sat Sep 09 21:41:14 GMT 2023","Sat Sep 09 21:41:28 GMT 2023","13659","","Google Translate | Text Translate Regression Tests: Google Translate | Text Translate Regression | Text Translate Autocorrect Tests","","","","Text-Autocorrect-Regression-01 - User should see ""Did you mean"" autocorrection option for text with a typo",""
+"passed","Sat Sep 09 21:41:12 GMT 2023","Sat Sep 09 21:41:14 GMT 2023","2600","","Google Translate | Text Translate Regression Tests","","","","""before all"" hook",""
