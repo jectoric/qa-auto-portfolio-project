@@ -28,13 +28,13 @@ describe('Google Translate | Text Translate Regression Tests', () => {
     });
 
     describe('Google Translate | Text Translate Regression | Text Translate Autocorrect Tests', () => {
-        // it('Text-Autocorrect-Regression-01 - User should see "Did you mean" autocorrection option for text with a typo', async () => {
-        //     await selectLanguagePage.clickSwapLanguages(tabName);
-        //     await textTranslatePage.insertSourceText('Привт! Як справи?');
-        //     await textTranslatePage.checkTextCorrection('Showing translation for', 'Привіт');
-        //     await textTranslatePage.clickTextCorrectionOption('Showing translation for', 'Привіт! Як справи?');
-        //     await textTranslatePage.checkTranslatedText('Hello! How are you?');
-        // });
+        it('Text-Autocorrect-Regression-01 - User should see "Did you mean" autocorrection option for text with a typo', async () => {
+            await selectLanguagePage.clickSwapLanguages(tabName);
+            await textTranslatePage.insertSourceText('Привт! Як справи?');
+            await textTranslatePage.checkTextCorrection('Showing translation for', 'Привіт');
+            await textTranslatePage.clickTextCorrectionOption('Showing translation for', 'Привіт! Як справи?');
+            await textTranslatePage.checkTranslatedText('Hello! How are you?');
+        });
 
         it('Text-Autocorrect-Regression-02 - User should see "Showing translation for" autocorrection option for text with a typo', async () => {
             await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
