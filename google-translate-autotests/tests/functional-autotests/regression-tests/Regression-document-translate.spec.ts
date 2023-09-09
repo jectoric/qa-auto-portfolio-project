@@ -1,6 +1,7 @@
 'use strict'
 import * as constants from '../../../helpers/constants';
 import { PageActions } from '../../../helpers/page-actions';
+import { takeScreenShot } from '../../../helpers/artifacts';
 import { CommonPage } from '../../../page-objects/common.page';
 import { DocumentTranslatePage } from '../../../page-objects/documentTranslate.page';
 
@@ -12,6 +13,10 @@ describe('Google Translate | Document Translate Regression Tests', () => {
     beforeAll(async () => {
         await pageActions.openPage(constants.BaseURL);
         await commonPage.clickGoogleTransalteTab('Document');
+    });
+
+    afterEach(async () => {
+        await takeScreenShot();
     });
 
     afterAll(async () => {

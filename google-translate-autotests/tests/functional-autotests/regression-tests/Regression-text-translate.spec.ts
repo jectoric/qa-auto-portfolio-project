@@ -21,7 +21,7 @@ describe('Google Translate | Text Translate Regression Tests', () => {
 
     afterEach(async () => {
         await takeScreenShot();
-    })
+    });
 
     afterAll(async () => {
         await pageActions.clearAllData();

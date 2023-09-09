@@ -39,7 +39,7 @@ export class SelectLanguagePage extends PageActions {
     }
 
     private swapLanguagesButton(tabName: string) {
-        return $(`${this.tabSelector(tabName)}//button[@aria-label="Swap languages (Cmd+Shift+S)"]`);
+        return $(`${this.tabSelector(tabName)}//button[contains(@aria-label, "Swap languages")]`);
     }
 
     private searchLanguagesInput(tabName: string, dropdownType: string) {
