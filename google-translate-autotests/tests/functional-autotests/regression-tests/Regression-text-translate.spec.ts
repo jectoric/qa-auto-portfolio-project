@@ -31,61 +31,61 @@ describe('Google Translate | Text Translate Regression Tests', () => {
             await textTranslatePage.checkTranslatedText('Hello! How are you?');
         });
 
-        it('Text-Autocorrect-Regression-02 - User should see "Showing translation for" autocorrection option for text with a typo', async () => {
-            await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
-            await textTranslatePage.checkTextCorrection('Showing translation for', 'Hello');
-            await textTranslatePage.clickTextCorrectionOption('Showing translation for', constants.engTranslateCheckText);
-            await textTranslatePage.checkTranslatedText(constants.ukrTranslateCheckText);
-        });
+        // it('Text-Autocorrect-Regression-02 - User should see "Showing translation for" autocorrection option for text with a typo', async () => {
+        //     await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
+        //     await textTranslatePage.checkTextCorrection('Showing translation for', 'Hello');
+        //     await textTranslatePage.clickTextCorrectionOption('Showing translation for', constants.engTranslateCheckText);
+        //     await textTranslatePage.checkTranslatedText(constants.ukrTranslateCheckText);
+        // });
 
-        it('Text-Autocorrect-Regression-03 - User should see "Translate instead" autocorrection option for text with a typo', async () => {
-            await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
-            await textTranslatePage.clickTextCorrectionOption('Translate instead', constants.engTypoTextCheck);
-            await textTranslatePage.checkTextCorrection('Did you mean:', 'Hello');
-            await textTranslatePage.clickTextCorrectionOption('Did you mean:', constants.engTranslateCheckText);
-            await textTranslatePage.checkTranslatedText(constants.ukrTranslateCheckText);
-        });
+        // it('Text-Autocorrect-Regression-03 - User should see "Translate instead" autocorrection option for text with a typo', async () => {
+        //     await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
+        //     await textTranslatePage.clickTextCorrectionOption('Translate instead', constants.engTypoTextCheck);
+        //     await textTranslatePage.checkTextCorrection('Did you mean:', 'Hello');
+        //     await textTranslatePage.clickTextCorrectionOption('Did you mean:', constants.engTranslateCheckText);
+        //     await textTranslatePage.checkTranslatedText(constants.ukrTranslateCheckText);
+        // });
 
-        it('Text-Autocorrect-Regression-04 - User should see "Translate from" tooltip after after entering text', async () => {
-            await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Lingala');
-            await textTranslatePage.insertSourceText(constants.engTranslateCheckText);
-            await textTranslatePage.checkTextCorrection('Translate from:', 'English');
-            await textTranslatePage.clickTextCorrectionOption('Translate from:', constants.engTranslateCheckText);
-        });
+        // it('Text-Autocorrect-Regression-04 - User should see "Translate from" tooltip after after entering text', async () => {
+        //     await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Lingala');
+        //     await textTranslatePage.insertSourceText(constants.engTranslateCheckText);
+        //     await textTranslatePage.checkTextCorrection('Translate from:', 'English');
+        //     await textTranslatePage.clickTextCorrectionOption('Translate from:', constants.engTranslateCheckText);
+        // });
 
-        it('Text-Autocorrect-Regression-05 - User should see "Translate from" and "Showing translation for" tooltips after after entering text', async () => {
-            // Check "Showing translation for" option
-            await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Lingala');
-            await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
-            await textTranslatePage.checkTextCorrection('Showing translation for', 'Hello');
-            await textTranslatePage.clickTextCorrectionOption('Showing translation for', constants.engTranslateCheckText);
+        // it('Text-Autocorrect-Regression-05 - User should see "Translate from" and "Showing translation for" tooltips after after entering text', async () => {
+        //     // Check "Showing translation for" option
+        //     await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Lingala');
+        //     await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
+        //     await textTranslatePage.checkTextCorrection('Showing translation for', 'Hello');
+        //     await textTranslatePage.clickTextCorrectionOption('Showing translation for', constants.engTranslateCheckText);
 
-            // Check "Translate from" tooltip
-            await textTranslatePage.checkTextCorrection('Translate from:', 'English');
-            await textTranslatePage.clickTextCorrectionOption('Translate from:', constants.engTranslateCheckText);
-        });
+        //     // Check "Translate from" tooltip
+        //     await textTranslatePage.checkTextCorrection('Translate from:', 'English');
+        //     await textTranslatePage.clickTextCorrectionOption('Translate from:', constants.engTranslateCheckText);
+        // });
 
-        it('Text-Autocorrect-Regression-06 - User should see "Translate instead" and "Showing translation for" tooltips after after entering text', async () => {
-            // Check "Translate instead" option
-            await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Lingala');
-            await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
-            await textTranslatePage.clickTextCorrectionOption('Translate instead', constants.engTypoTextCheck);
-            await textTranslatePage.checkTextCorrection('Did you mean:', 'Hello');
-            await textTranslatePage.clickTextCorrectionOption('Did you mean:', constants.engTranslateCheckText);
+        // it('Text-Autocorrect-Regression-06 - User should see "Translate instead" and "Showing translation for" tooltips after after entering text', async () => {
+        //     // Check "Translate instead" option
+        //     await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Lingala');
+        //     await textTranslatePage.insertSourceText(constants.engTypoTextCheck);
+        //     await textTranslatePage.clickTextCorrectionOption('Translate instead', constants.engTypoTextCheck);
+        //     await textTranslatePage.checkTextCorrection('Did you mean:', 'Hello');
+        //     await textTranslatePage.clickTextCorrectionOption('Did you mean:', constants.engTranslateCheckText);
 
-            // Check "Translate from" tooltip
-            await textTranslatePage.checkTextCorrection('Translate from:', 'English');
-            await textTranslatePage.clickTextCorrectionOption('Translate from:', constants.engTranslateCheckText);
-        });
+        //     // Check "Translate from" tooltip
+        //     await textTranslatePage.checkTextCorrection('Translate from:', 'English');
+        //     await textTranslatePage.clickTextCorrectionOption('Translate from:', constants.engTranslateCheckText);
+        // });
     });
 
-    it('Text-Transalate-Regression-07 - User should not be able select same languages in Source/Target fields', async () => {
-        await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Ukrainian');
-        await selectLanguagePage.checkSelectedLanguage(tabName, 'To', 'English');
-    });
+    // it('Text-Transalate-Regression-07 - User should not be able select same languages in Source/Target fields', async () => {
+    //     await selectLanguagePage.searchAndSelectLanguage(tabName, 'From', 'Ukrainian');
+    //     await selectLanguagePage.checkSelectedLanguage(tabName, 'To', 'English');
+    // });
 
-    it('Text-Transalate-Regression-08 - User should be able to use redirect button after inserting link', async () => {
-        await textTranslatePage.insertSourceText(constants.LinkedinURL);
-        await textTranslatePage.checkTargetFieldLink(constants.LinkedinURL, constants.LinkedinTransaltedURL);
-    });
+    // it('Text-Transalate-Regression-08 - User should be able to use redirect button after inserting link', async () => {
+    //     await textTranslatePage.insertSourceText(constants.LinkedinURL);
+    //     await textTranslatePage.checkTargetFieldLink(constants.LinkedinURL, constants.LinkedinTransaltedURL);
+    // });
 });

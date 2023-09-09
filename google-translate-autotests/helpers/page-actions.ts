@@ -155,7 +155,7 @@ export class PageActions {
         try {
             await this.waitElementVisible(element);
             await element.doubleClick();
-            while ((await element.getValue()).length !== 0) browser.keys('Backspace');
+            while ((await element.getValue()).length !== 0) browser.keys('Delete');
         } catch (error) {
             throw new Error(`Unable to clear ${element.name}: ${error}`);
         }
