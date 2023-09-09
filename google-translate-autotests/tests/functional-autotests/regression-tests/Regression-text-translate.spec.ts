@@ -1,6 +1,7 @@
 'use strict'
 import * as constants from '../../../helpers/constants';
 import { PageActions } from '../../../helpers/page-actions';
+import { takeScreenShot } from '../../../helpers/artifacts';
 import { TextTranslatePage } from '../../../page-objects/textTranslate.page';
 import { SelectLanguagePage } from '../../../page-objects/selectLanguage.page';
 
@@ -18,6 +19,10 @@ describe('Google Translate | Text Translate Regression Tests', () => {
         await selectLanguagePage.selectFromToLanguages(tabName, 'English', 'Ukrainian');
     });
 
+    afterEach(async () => {
+        await takeScreenShot();
+    })
+
     afterAll(async () => {
         await pageActions.clearAllData();
     });
@@ -26,7 +31,7 @@ describe('Google Translate | Text Translate Regression Tests', () => {
         it('Text-Autocorrect-Regression-01 - User should see "Did you mean" autocorrection option for text with a typo', async () => {
             await selectLanguagePage.clickSwapLanguages(tabName);
             await textTranslatePage.insertSourceText('Привт! Як справи?');
-            await textTranslatePage.checkTextCorrection('Showing translation for', 'Привіт');
+            await textTranslatePage.checkTextCorrection('Showing translaasdastion for', 'Привіт');
             await textTranslatePage.clickTextCorrectionOption('Showing translation for', 'Привіт! Як справи?');
             await textTranslatePage.checkTranslatedText('Hello! How are you?');
         });

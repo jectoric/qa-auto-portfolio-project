@@ -1,6 +1,6 @@
-const path = require('path')
-const fs = require('fs')
-const allure = require('allure-commandline')
+const path = require('path');
+const fs = require('fs');
+const allure = require('allure-commandline');
 global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = {
@@ -46,13 +46,6 @@ exports.config = {
     onPrepare: function (config, capabilities) {
         if (!fs.existsSync(downloadDir)) {
             fs.mkdirSync(downloadDir);
-        }
-    },
-
-    afterTest: async function (test, context, { error }) {
-        if (error) {
-            const screenshot = await browser.takeScreenshot();
-            allure.addAttachment('Screenshot', screenshot, 'image/png');
         }
     },
 
