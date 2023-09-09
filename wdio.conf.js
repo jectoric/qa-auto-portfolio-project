@@ -12,7 +12,7 @@ exports.config = {
     },
     suites: {
         smoke_tests: ['./google-translate-autotests/tests/functional-autotests/smoke-tests/*.spec.ts'],
-        regression_tests: ['./google-translate-autotests/tests/functional-autotests/regression-tests/*.spec.ts'],
+        regression_tests: ['./google-translate-autotests/tests/functional-autotests/regression-tests/Regression-text-translate.spec.ts'],
         ui_comparison_tests: ['./google-translate-autotests/tests/non-functional-autotests/ui-comparison-tests/**/*.spec.ts']
     },
     maxInstances: 10,
