@@ -1,4 +1,4 @@
-name: Regression Tests
+name: Smoke Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
   regression-tests:
     timeout-minutes: 10
-    name: Run Regression Tests
+    name: Run Smoke Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,8 +20,8 @@ jobs:
       - name: Install Dependecies
         run: npm install
 
-      - name: Run Regression Tests Chrome
-        run: BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} npm run run-regression-test-cases-chrome
+      - name: Run Smoke Tests Chrome
+        run: BROWSERSTACK_USERNAME=${{ secrets.BROWSERSTACK_USERNAME }} BROWSERSTACK_ACCESS_KEY=${{ secrets.BROWSERSTACK_ACCESS_KEY }} npm run run-smoke-test-cases-chrome
 
       - name: Allure history
         uses: actions/checkout@v2
