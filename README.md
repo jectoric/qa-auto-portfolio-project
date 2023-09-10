@@ -1,5 +1,5 @@
 # qa-auto-portfolio-project
-![Workflow result](https://github.com/jectoric/qa-auto-portfolio-project/workflows/Pipeline.yml/badge.svg)
+![Regression Tests](https://github.com/jectoric/qa-auto-portfolio-project/actions/workflows/Pipeline.yml/badge.svg)
 
 **qa-auto-portfolio-project** created to check the functionality and appearance of the [Google Transalte](https://translate.google.com/) site and works on the WebdriverIO automation framework. Autotests check the functionality of a site on Chrome and Firefox browsers. In addition to functional tests, there are also non-functional tests for checking appearance by comparing screenshots (UI Regression Tests)
 

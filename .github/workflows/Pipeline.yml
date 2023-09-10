@@ -1,4 +1,4 @@
-name: webdriverio-ci
+name: Regression Tests
 
 on:
   push:
