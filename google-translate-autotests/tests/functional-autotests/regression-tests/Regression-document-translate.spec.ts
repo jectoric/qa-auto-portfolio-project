@@ -29,7 +29,7 @@ describe('Google Translate | Document Translate Regression Tests', () => {
     });
 
     it('Document-Transalate-Regression-02 - User should be able to see tab captions and click "Learn more" button', async () => {
-        await documentTranslatePage.checkTabText(['Or choose a file', 'Suppor asdasd ted file types: .docx, .pdf, .pptx, .xlsx.']);
+        await documentTranslatePage.checkTabText(['Or choose a file', 'Supported file types: .docx, .pdf, .pptx, .xlsx.']);
         await documentTranslatePage.clickLearnMoreButton('https://support.google.com/translate/answer/');
     });
 
