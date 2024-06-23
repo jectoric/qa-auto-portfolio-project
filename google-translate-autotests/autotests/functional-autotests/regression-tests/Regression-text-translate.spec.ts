@@ -1,6 +1,6 @@
 'use strict'
-import * as constants from '../../../data/constants';
-import { PageActions } from '../../../helpers/page-actions';
+import * as constants from '@data/constants';
+import { PageActions } from '@helpers/page-actions';
 import { takeScreenShot } from '../../../helpers/artifacts';
 import { PageObjects } from '@page-objects/pageObjects';
 

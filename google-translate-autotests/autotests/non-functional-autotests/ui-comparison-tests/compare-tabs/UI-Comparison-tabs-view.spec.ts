@@ -1,6 +1,6 @@
 'use strict';
-import * as constants from '../../../../data/constants';
-import { PageActions } from '../../../../helpers/page-actions';
+import * as constants from '@data/constants';
+import { PageActions } from '@helpers/page-actions';
 import { PageObjects } from '@page-objects/pageObjects';
 import testData from './UI-Comparison-tabs-data';
 

@@ -1,6 +1,6 @@
 import allure from '@wdio/allure-reporter';
-import commonPage from './common.page';
-import { PageActions } from '../helpers/page-actions';
+import commonPage from '@page-objects/common.page';
+import { PageActions } from '@helpers/page-actions';
 
 class SelectLanguagePage extends PageActions {
     //-----------------------------------------------------------

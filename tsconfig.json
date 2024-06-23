@@ -7,6 +7,8 @@
         "module": "commonjs",
         "paths": {
             "@page-objects/*": ["./google-translate-autotests/page-objects/*"],
+            "@helpers/*": ["./google-translate-autotests/helpers/*"],
+            "@data/*": ["./google-translate-autotests/data/*"],
         },
         "types": [
             "node",

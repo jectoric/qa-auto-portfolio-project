@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 import allure from '@wdio/allure-reporter';
-import commonPage from './common.page';
-import { PageActions } from '../helpers/page-actions';
+import commonPage from '@page-objects/common.page';
+import { PageActions } from '@helpers/page-actions';
 
 class DocumentTranslatePage extends PageActions {
     //-----------------------------------------------------------

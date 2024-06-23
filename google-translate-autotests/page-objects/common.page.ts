@@ -1,5 +1,5 @@
 import allure from '@wdio/allure-reporter';
-import { PageActions } from '../helpers/page-actions';
+import { PageActions } from '@helpers/page-actions';
 
 class CommonPage extends PageActions {
     //-----------------------------------------------------------

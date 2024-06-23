@@ -1,6 +1,6 @@
 import allure from '@wdio/allure-reporter';
-import { PageActions } from '../helpers/page-actions';
-import websitesTranslatePage from '../page-objects/websitesTranslate.page';
+import { PageActions } from '@helpers/page-actions';
+import websitesTranslatePage from '@page-objects/websitesTranslate.page';
 
 class TextTranslatePage extends PageActions {
     //-----------------------------------------------------------
