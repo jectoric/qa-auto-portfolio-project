@@ -1,7 +1,7 @@
 import allure from '@wdio/allure-reporter';
 import { PageActions } from '../helpers/page-actions';
 
-export class CommonPage extends PageActions {
+class CommonPage extends PageActions {
     //-----------------------------------------------------------
     // ELEMENTS
     //-----------------------------------------------------------
@@ -34,3 +34,5 @@ export class CommonPage extends PageActions {
         });
     }
 }
+
+export default new CommonPage();

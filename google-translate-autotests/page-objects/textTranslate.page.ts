@@ -1,10 +1,8 @@
 import allure from '@wdio/allure-reporter';
 import { PageActions } from '../helpers/page-actions';
-import { WebsitesTranslatePage } from '../page-objects/websitesTranslate.page';
+import websitesTranslatePage from '../page-objects/websitesTranslate.page';
 
-const websitesTranslatePage: WebsitesTranslatePage = new WebsitesTranslatePage();
-
-export class TextTranslatePage extends PageActions {
+class TextTranslatePage extends PageActions {
     //-----------------------------------------------------------
     // ELEMENTS
     //-----------------------------------------------------------
@@ -153,3 +151,5 @@ export class TextTranslatePage extends PageActions {
         });
     }
 }
+
+export default new TextTranslatePage();

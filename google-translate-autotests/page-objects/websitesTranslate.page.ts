@@ -1,7 +1,7 @@
 import allure from '@wdio/allure-reporter';
 import { PageActions } from '../helpers/page-actions';
 
-export class WebsitesTranslatePage extends PageActions {
+class WebsitesTranslatePage extends PageActions {
     //-----------------------------------------------------------
     // ELEMENTS
     //-----------------------------------------------------------
@@ -67,3 +67,5 @@ export class WebsitesTranslatePage extends PageActions {
         });
     }
 }
+
+export default new WebsitesTranslatePage();

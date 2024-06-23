@@ -1,10 +1,8 @@
 import allure from '@wdio/allure-reporter';
-import { CommonPage } from './common.page';
+import commonPage from './common.page';
 import { PageActions } from '../helpers/page-actions';
 
-const commonPage: CommonPage = new CommonPage();
-
-export class SelectLanguagePage extends PageActions {
+class SelectLanguagePage extends PageActions {
     //-----------------------------------------------------------
     // BASIC SELECTORS
     //-----------------------------------------------------------
@@ -91,3 +89,5 @@ export class SelectLanguagePage extends PageActions {
         });
     }
 }
+
+export default new SelectLanguagePage();

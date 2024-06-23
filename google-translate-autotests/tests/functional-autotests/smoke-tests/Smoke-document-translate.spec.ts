@@ -1,22 +1,18 @@
 'use strict'
 import * as constants from '../../../helpers/constants';
 import { PageActions } from '../../../helpers/page-actions';
-import { CommonPage } from '../../../page-objects/common.page';
-import { SelectLanguagePage } from '../../../page-objects/selectLanguage.page';
-import { DocumentTranslatePage } from '../../../page-objects/documentTranslate.page';
+import { PageObjects } from '../../../page-objects/pageObjects';
 
 describe('Google Translate | Document Translate Smoke Tests', () => {
-    const commonPage: CommonPage = new CommonPage();
+    const pageObjects = new PageObjects();
     const pageActions: PageActions = new PageActions();
-    const selectLanguagePage: SelectLanguagePage = new SelectLanguagePage();
-    const documentTranslatePage: DocumentTranslatePage = new DocumentTranslatePage();
     const tabName = 'Document';
     const fileName = 'test_document.pdf';
     const fileSize = '16 KB';
 
     beforeEach(async () => {
         await pageActions.openPage(constants.BaseURL);
-        await commonPage.clickGoogleTransalteTab(tabName);
+        await pageObjects.commonPage.clickGoogleTransalteTab(tabName);
     });
 
     afterAll(async () => {
@@ -24,29 +20,29 @@ describe('Google Translate | Document Translate Smoke Tests', () => {
     });
 
     it('Document-Transalate-Smoke-01 - User should be able to see name and size of uploaded file', async () => {
-        await documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
+        await pageObjects.documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
     });
 
     it('Document-Transalate-Smoke-02 - User should be able to remove uploaded file', async () => {
-        await documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
-        await documentTranslatePage.waitForDocumentTabButton('Translate');
-        await documentTranslatePage.removeFile(fileName, fileSize);
-        await documentTranslatePage.checkTabText(['Choose a document']);
+        await pageObjects.documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
+        await pageObjects.documentTranslatePage.waitForDocumentTabButton('Translate');
+        await pageObjects.documentTranslatePage.removeFile(fileName, fileSize);
+        await pageObjects.documentTranslatePage.checkTabText(['Choose a document']);
     });
 
     it('Document-Transalate-Smoke-03 - User should be able to tranlate uploaded file', async () => {
-        await selectLanguagePage.selectFromToLanguages(tabName, 'Ukrainian', 'English');
-        await documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
-        await documentTranslatePage.clickDocumentTabButton('Translate');
-        await documentTranslatePage.clickDocumentTabButton('Download translation');
-        await documentTranslatePage.checkDownloadedFile(fileName, constants.fileTextCheck);
+        await pageObjects.selectLanguagePage.selectFromToLanguages(tabName, 'Ukrainian', 'English');
+        await pageObjects.documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
+        await pageObjects.documentTranslatePage.clickDocumentTabButton('Translate');
+        await pageObjects.documentTranslatePage.clickDocumentTabButton('Download translation');
+        await pageObjects.documentTranslatePage.checkDownloadedFile(fileName, constants.fileTextCheck);
     });
 
     it('Document-Transalate-Smoke-04 - User should be able to remove translated file', async () => {
-        await documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
-        await documentTranslatePage.clickDocumentTabButton('Translate');
-        await documentTranslatePage.waitForDocumentTabButton('Download translation');
-        await documentTranslatePage.removeFile(fileName, fileSize);
-        await documentTranslatePage.checkTabText(['Choose a document']);
+        await pageObjects.documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
+        await pageObjects.documentTranslatePage.clickDocumentTabButton('Translate');
+        await pageObjects.documentTranslatePage.waitForDocumentTabButton('Download translation');
+        await pageObjects.documentTranslatePage.removeFile(fileName, fileSize);
+        await pageObjects.documentTranslatePage.checkTabText(['Choose a document']);
     });
 });
