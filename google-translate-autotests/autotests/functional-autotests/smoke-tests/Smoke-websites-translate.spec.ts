@@ -1,17 +1,18 @@
 'use strict'
 import * as constants from '@data/constants';
+import { Languages } from '@data/languages';
+import { Tabs } from '@data/web-tabs';
 import { PageActions } from '@helpers/page-actions';
 import { PageObjects } from '@page-objects/pageObjects';
 
 describe('Google Translate | Websites Translate Smoke Tests', () => {
     const pageObjects = new PageObjects();
     const pageActions: PageActions = new PageActions();
-    const tabName = 'Website';
 
     beforeAll(async () => {
         await pageActions.openPage(constants.BaseURL);
-        await pageObjects.commonPage.clickGoogleTransalteTab(tabName);
-        await pageObjects.selectLanguagePage.selectFromToLanguages(tabName, 'English', 'Ukrainian');
+        await pageObjects.commonPage.clickGoogleTransalteTab(Tabs.TEXT);
+        await pageObjects.selectLanguagePage.selectFromToLanguages(Tabs.TEXT, Languages.ENGLISH, Languages.UKRAINIAN);
     });
 
     afterAll(async () => {

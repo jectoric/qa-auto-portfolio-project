@@ -1,12 +1,13 @@
 import allure from '@wdio/allure-reporter';
 import { PageActions } from '@helpers/page-actions';
+import { Tabs } from '@data/web-tabs';
 
 class CommonPage extends PageActions {
     //-----------------------------------------------------------
     // ELEMENTS
     //-----------------------------------------------------------
 
-    private selectTransalteTab(tabName: string) {
+    private selectTransalteTab(tabName: Tabs) {
         return $(`button[aria-label="${tabName} translation"]`);
     }
 
@@ -20,7 +21,7 @@ class CommonPage extends PageActions {
         });
     };
 
-    public async clickGoogleTransalteTab(tabName: string) {
+    public async clickGoogleTransalteTab(tabName: Tabs) {
         await allure.step(`When I click Google Transalte Tab "${tabName}"`, async () => {
             await this.waitClick(this.selectTransalteTab(tabName));
         });

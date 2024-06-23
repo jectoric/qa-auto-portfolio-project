@@ -1,18 +1,19 @@
 'use strict'
 import * as constants from '@data/constants';
+import { Languages } from '@data/languages';
+import { Tabs } from '@data/web-tabs';
 import { PageActions } from '@helpers/page-actions';
 import { PageObjects } from '@page-objects/pageObjects';
 
 describe('Google Translate | Document Translate Smoke Tests', () => {
     const pageObjects = new PageObjects();
     const pageActions: PageActions = new PageActions();
-    const tabName = 'Document';
     const fileName = 'test_document.pdf';
     const fileSize = '16 KB';
 
     beforeEach(async () => {
         await pageActions.openPage(constants.BaseURL);
-        await pageObjects.commonPage.clickGoogleTransalteTab(tabName);
+        await pageObjects.commonPage.clickGoogleTransalteTab(Tabs.DOCUMENT);
     });
 
     afterAll(async () => {
@@ -31,7 +32,7 @@ describe('Google Translate | Document Translate Smoke Tests', () => {
     });
 
     it('Document-Transalate-Smoke-03 - User should be able to tranlate uploaded file', async () => {
-        await pageObjects.selectLanguagePage.selectFromToLanguages(tabName, 'Ukrainian', 'English');
+        await pageObjects.selectLanguagePage.selectFromToLanguages(Tabs.DOCUMENT, Languages.UKRAINIAN, Languages.ENGLISH);
         await pageObjects.documentTranslatePage.uploadFileAndCheck(fileName, fileSize);
         await pageObjects.documentTranslatePage.clickDocumentTabButton('Translate');
         await pageObjects.documentTranslatePage.clickDocumentTabButton('Download translation');
