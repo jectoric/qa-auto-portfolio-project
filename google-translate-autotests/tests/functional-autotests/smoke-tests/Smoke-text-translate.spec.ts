@@ -1,7 +1,7 @@
 'use strict'
 import * as constants from '../../../helpers/constants';
 import { PageActions } from '../../../helpers/page-actions';
-import { PageObjects } from '../../../page-objects/pageObjects';
+import { PageObjects } from '@page-objects/pageObjects';
 
 describe('Google Translate | Text Translate Smoke Tests', () => {
     const pageActions: PageActions = new PageActions();

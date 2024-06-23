@@ -1,7 +1,7 @@
 'use strict';
 import * as constants from '../../../../helpers/constants';
 import { PageActions } from '../../../../helpers/page-actions';
-import { PageObjects } from '../../../../page-objects/pageObjects';
+import { PageObjects } from '@page-objects/pageObjects';
 import testData from './UI-Comparison-tabs-data';
 
 describe('Google Translate | Tabs UI Regression Tests', () => {

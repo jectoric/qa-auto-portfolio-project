@@ -1,13 +1,18 @@
 {
+    "ts-node": {
+        "require": ["tsconfig-paths/register"]
+    },
     "compilerOptions": {
         "moduleResolution": "node",
         "module": "commonjs",
+        "paths": {
+            "@page-objects/*": ["./google-translate-autotests/page-objects/*"],
+        },
         "types": [
             "node",
             "@wdio/globals/types",
             "expect-webdriverio",
             "@wdio/jasmine-framework",
-            "mocha",
             "@wdio/allure-reporter" 
         ],
         "target": "es2022"

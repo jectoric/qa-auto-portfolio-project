@@ -2,7 +2,7 @@
 import * as constants from '../../../helpers/constants';
 import { PageActions } from '../../../helpers/page-actions';
 import { takeScreenShot } from '../../../helpers/artifacts';
-import { PageObjects } from '../../../page-objects/pageObjects';
+import { PageObjects } from '@page-objects/pageObjects';
 
 describe('Google Translate | Document Translate Regression Tests', () => {
     const pageActions: PageActions = new PageActions();
