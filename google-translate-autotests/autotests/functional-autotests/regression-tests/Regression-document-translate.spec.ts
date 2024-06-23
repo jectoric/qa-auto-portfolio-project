@@ -1,5 +1,5 @@
 'use strict'
-import * as constants from '@data/constants';
+import * as links from '@data/links';
 import { Tabs } from '@data/web-tabs';
 import { PageActions } from '@helpers/page-actions';
 import { PageObjects } from '@page-objects/pageObjects';
@@ -9,7 +9,7 @@ describe('Google Translate | Document Translate Regression Tests', () => {
     const pageObjects = new PageObjects();
 
     beforeAll(async () => {
-        await pageActions.openPage(constants.BaseURL);
+        await pageActions.openPage(links.BaseURL);
         await pageObjects.commonPage.clickGoogleTransalteTab(Tabs.DOCUMENT);
     });
 

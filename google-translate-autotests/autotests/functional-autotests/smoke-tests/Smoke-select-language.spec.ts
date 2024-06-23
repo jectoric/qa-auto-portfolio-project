@@ -1,6 +1,6 @@
 'use strict'
 import { Tabs } from '@data/web-tabs';
-import * as constants from '@data/constants';
+import * as links from '@data/links';
 import { PageActions } from '@helpers/page-actions';
 import { PageObjects } from '@page-objects/pageObjects';
 import { Languages } from '@data/languages';
@@ -12,7 +12,7 @@ describe('Google Translate | Select Language Smoke Tests', () => {
     const tabNames = Object.values(Tabs);
 
     beforeAll(async () => {
-        await pageActions.openPage(constants.BaseURL);
+        await pageActions.openPage(links.BaseURL);
     });
 
     afterAll(async () => {

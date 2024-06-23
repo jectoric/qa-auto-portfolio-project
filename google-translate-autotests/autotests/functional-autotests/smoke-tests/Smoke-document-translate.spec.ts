@@ -1,5 +1,6 @@
 'use strict'
-import * as constants from '@data/constants';
+import * as constants from '@data/text-constants';
+import * as links from '@data/links';
 import { Languages } from '@data/languages';
 import { Tabs } from '@data/web-tabs';
 import { PageActions } from '@helpers/page-actions';
@@ -12,7 +13,7 @@ describe('Google Translate | Document Translate Smoke Tests', () => {
     const fileSize = '16 KB';
 
     beforeEach(async () => {
-        await pageActions.openPage(constants.BaseURL);
+        await pageActions.openPage(links.BaseURL);
         await pageObjects.commonPage.clickGoogleTransalteTab(Tabs.DOCUMENT);
     });
 

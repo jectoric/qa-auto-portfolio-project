@@ -1,5 +1,5 @@
 'use strict';
-import * as constants from '@data/constants';
+import * as links from '@data/links';
 import { PageActions } from '@helpers/page-actions';
 import { PageObjects } from '@page-objects/pageObjects';
 import testData from './UI-Comparison-tabs-data';
@@ -9,7 +9,7 @@ describe('Google Translate | Tabs UI Regression Tests', () => {
     const pageActions: PageActions = new PageActions();
 
     beforeAll(async () => {
-        await pageActions.openPage(constants.BaseURL);
+        await pageActions.openPage(links.BaseURL);
     });
 
     afterAll(async () => {

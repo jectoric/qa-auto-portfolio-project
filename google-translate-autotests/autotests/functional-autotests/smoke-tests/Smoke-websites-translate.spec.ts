@@ -1,5 +1,5 @@
 'use strict'
-import * as constants from '@data/constants';
+import * as links from '@data/links';
 import { Languages } from '@data/languages';
 import { Tabs } from '@data/web-tabs';
 import { PageActions } from '@helpers/page-actions';
@@ -10,7 +10,7 @@ describe('Google Translate | Websites Translate Smoke Tests', () => {
     const pageActions: PageActions = new PageActions();
 
     beforeAll(async () => {
-        await pageActions.openPage(constants.BaseURL);
+        await pageActions.openPage(links.BaseURL);
         await pageObjects.commonPage.clickGoogleTransalteTab(Tabs.TEXT);
         await pageObjects.selectLanguagePage.selectFromToLanguages(Tabs.TEXT, Languages.ENGLISH, Languages.UKRAINIAN);
     });
@@ -20,8 +20,8 @@ describe('Google Translate | Websites Translate Smoke Tests', () => {
     });
 
     it('Websites-Translate-Smoke-01 - User should be able to translate page', async () => {
-        await pageObjects.websitesTranslatePage.fillWebsiteInputField(constants.LinkedinURL);
-        await pageObjects.websitesTranslatePage.checkTranslatedWebsite(constants.LinkedinTransaltedURL);
+        await pageObjects.websitesTranslatePage.fillWebsiteInputField(links.LinkedinURL);
+        await pageObjects.websitesTranslatePage.checkTranslatedWebsite(links.LinkedinTransaltedURL);
     });
 
     describe('Google Translate | Websites Translate Smoke Tests | Negative Tests', () => {
