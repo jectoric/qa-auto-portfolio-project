@@ -78,7 +78,7 @@ class DocumentTranslatePage extends PageActions {
     public async uploadFile(fileName: string) {
         await allure.step(`When I upload file with name "${fileName}"`, async () => {
             const path = require('path');
-            const filePath = path.join(__dirname, `../data/${fileName}`);
+            const filePath = path.join(__dirname, `../files/${fileName}`);
             await this.waitElementVisible(this.browseComputorLabel);
             await this.documentUploadInput.setValue(filePath);
         });

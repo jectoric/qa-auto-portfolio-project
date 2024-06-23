@@ -44,7 +44,7 @@
 - Folder with non-function test cases (UI Comparison) `google-translate-autotests/tests/non-functional-autotests`
 - Folder with page objects `google-translate-autotests/page-objects`
 - Folder with helpers `google-translate-autotests/helpers`
-- Folder with test data (files, images) `google-translate-autotests/data`
+- Folder with test data (files, images) `google-translate-autotests/files`
 
 ## Setup project and run autotests locally
 ### 1. Precondition:
