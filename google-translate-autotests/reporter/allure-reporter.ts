@@ -1,4 +1,5 @@
 import { removeDirectory } from '@utils/FileUtils';
+
 const allure = require('allure-commandline');
 
 export function removeAllureDirectories(): void {

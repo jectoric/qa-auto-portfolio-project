@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import * as constants from '@data/text-constants';
 import * as links from '@data/links';
 import { Languages } from '@data/languages';

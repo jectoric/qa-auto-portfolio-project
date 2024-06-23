@@ -71,7 +71,7 @@ class TextTranslatePage extends PageActions {
 
     public async checkTranslatedText(text: string) {
         await allure.step(`When I check translated text "${text}"`, async () => {
-            let arrayToCheck = text.split(' ');
+            const arrayToCheck = text.split(' ');
             for (let i = 0; i < arrayToCheck.length; i++) {
                 await this.waitElementVisible(this.getTransaltedText(arrayToCheck[i]));
             }
@@ -82,7 +82,7 @@ class TextTranslatePage extends PageActions {
         await allure.step(`When I check text correction message "${message}: ${suggestedValiant}"`, async () => {
             message === 'Translate from:'
                 ? await this.waitElementVisible(this.incorrectLanguageCorrection(message, suggestedValiant))
-                : await this.waitElementVisible(this.textCorrection(message, suggestedValiant))
+                : await this.waitElementVisible(this.textCorrection(message, suggestedValiant));
         });
     }
 

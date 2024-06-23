@@ -11,7 +11,7 @@ class SelectLanguagePage extends PageActions {
     //-----------------------------------------------------------
 
     private tabSelector(tabName: Tabs) {
-        return `//h1[text()='${tabName} translation']/following-sibling::div`
+        return `//h1[text()='${tabName} translation']/following-sibling::div`;
     }
 
     private moreLanguages(dropdownType: DropdownTypes) {

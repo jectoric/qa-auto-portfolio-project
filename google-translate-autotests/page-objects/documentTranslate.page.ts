@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
+
 import allure from '@wdio/allure-reporter';
 import commonPage from '@page-objects/common.page';
 import { PageActions } from '@helpers/page-actions';
@@ -55,7 +56,7 @@ class DocumentTranslatePage extends PageActions {
             for (const text of checkTextArray) {
                 state === 'Visible'
                     ? await this.waitElementVisible(this.tabText(text))
-                    : await this.waitElementInvisible(this.tabText(text))
+                    : await this.waitElementInvisible(this.tabText(text));
             }
         });
     }

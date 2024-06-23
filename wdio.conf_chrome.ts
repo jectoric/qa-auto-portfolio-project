@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('deepmerge');
 const wdioConf = require('./wdio.conf.js');
+
 global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = merge(wdioConf.config, {

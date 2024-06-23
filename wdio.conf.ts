@@ -1,7 +1,7 @@
 import { generateAllureReport, removeAllureDirectories } from '@reporter/allure-reporter';
 import { removeDirectory } from '@helpers/file-actions';
 
-const sharedState = require('@reporter/SharedState')
+const sharedState = require('@reporter/SharedState');
 const path = require('path');
 const fs = require('fs');
 
@@ -64,7 +64,7 @@ export const config: WebdriverIO.Config = {
     async afterTest(test, context, { error }) {
         if (error) {
             const screenshot = await driver.takeScreenshot();
-            sharedState.setScreenshot(test.title, screenshot)
+            sharedState.setScreenshot(test.title, screenshot);
         }
     },
 
@@ -72,4 +72,4 @@ export const config: WebdriverIO.Config = {
         await removeDirectory(downloadDir);
         await generateAllureReport();
     },
-}
+};

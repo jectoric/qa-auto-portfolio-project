@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import * as links from '@data/links';
 import { Tabs } from '@data/web-tabs';
 import { PageActions } from '@helpers/page-actions';

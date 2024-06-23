@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import * as constants from '@data/text-constants';
 import * as links from '@data/links';
 import { Languages } from '@data/languages';
@@ -27,7 +27,7 @@ describe('Google Translate | Text Translate Smoke Tests', () => {
     it('Text-Translate-Smoke-02 - User should be able to use "Detect Language" option', async () => {
         await pageObjects.selectLanguagePage.selectFromToLanguages(Tabs.TEXT, Languages.DETECT_LANGUAGE, Languages.UKRAINIAN);
         await pageObjects.textTranslatePage.insertSourceText(constants.engTranslateCheckText);
-        await pageObjects.selectLanguagePage.checkSelectedLanguage(Tabs.TEXT, 'From', 'English - Detected')
+        await pageObjects.selectLanguagePage.checkSelectedLanguage(Tabs.TEXT, 'From', 'English - Detected');
         await pageObjects.textTranslatePage.checkTranslatedText(constants.ukrTranslateCheckText);
     });
 

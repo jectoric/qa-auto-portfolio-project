@@ -2,6 +2,7 @@
 import * as fs from 'fs';
 import { isImagesPixelsMatch } from './image-comparison';
 import allure from '@wdio/allure-reporter';
+
 const TIMEOUT = 10000;
 const WAIT_FOR_SCRIPT: number = 500;
 
@@ -17,7 +18,7 @@ export class PageActions {
     public async openPage(url: string): Promise<void> {
         await browser.url(url);
         await this.checkOpenedPage(url);
-    };
+    }
 
     /**
      * This function will clear all browser data
@@ -26,7 +27,7 @@ export class PageActions {
         await browser.execute('try {window.sessionStorage.clear(); } catch(e) {}');
         await browser.execute('try {window.localStorage.clear(); } catch(e) {}');
         await browser.deleteCookies();
-    };
+    }
 
     /**
      * This function will help to check if web page was opened
@@ -34,8 +35,8 @@ export class PageActions {
      * @param {Number} timeout | Web page URL address
      */
     protected async checkOpenedPage(url: string, timeout: number = TIMEOUT) {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = `The page ${url} was not opened within ${to}ms`;
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = `The page ${url} was not opened within ${to}ms`;
         await browser.waitUntil(async () => {
             const currentUrl = await browser.getUrl();
             return currentUrl.includes(url);
@@ -48,7 +49,7 @@ export class PageActions {
     protected async switchToNextTab(): Promise<void> {
         const handles = await browser.getWindowHandles();
         await browser.switchToWindow(handles[handles.length - 1]);
-    };
+    }
 
     /**
      * This function will swith you to the previous browser tab
@@ -56,7 +57,7 @@ export class PageActions {
     protected async switchToPreviosTab(): Promise<void> {
         const handles = await browser.getWindowHandles();
         await browser.switchToWindow(handles[handles.length - 2]);
-    };
+    }
 
     /**
      * This function closes ccurrent browser tab
@@ -64,7 +65,7 @@ export class PageActions {
     protected async closeTab(): Promise<void> {
         await browser.execute('window.close()');
         await this.switchToNextTab();
-    };
+    }
 
     //-----------------------------------------------------------
     // WEB ELEMENTS INTERACTION BASIC METHODS
@@ -77,14 +78,14 @@ export class PageActions {
      * @param {Number} timeout | Custom timeout
      */
     protected async waitElementPresent(element: any, message?: string, timeout: number = TIMEOUT): Promise<void> {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = message ? message : await element.selector + ' is not presented.';
-        let EC = require('wdio-wait-for');
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = message ? message : `${await element.selector } is not presented.`;
+        const EC = require('wdio-wait-for');
         await browser.waitUntil(EC.presenceOf(element), {
             timeout: to,
             timeoutMsg: mess,
         });
-    };
+    }
 
     /**
      * This function will help to wait until web element disappear
@@ -93,15 +94,15 @@ export class PageActions {
      * @param {Number} timeout | Custom timeout
      */
     protected async waitElementIsNotPresent(element: any, message?: string, timeout: number = TIMEOUT): Promise<void> {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = message ? message : await element.selector + ' is presented.';
-        let EC = require('wdio-wait-for');
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = message ? message : `${await element.selector } is presented.`;
+        const EC = require('wdio-wait-for');
         await browser.waitUntil(EC.stalenessOf(element), {
             timeout: to,
             timeoutMsg: mess,
         });
         await browser.pause(WAIT_FOR_SCRIPT);
-    };
+    }
 
     /**
      * This function will help to wait until web element visible
@@ -110,14 +111,14 @@ export class PageActions {
      * @param {Number} timeout | Custom timeout
      */
     protected async waitElementVisible(element: any, message?: string, timeout: number = TIMEOUT): Promise<void> {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = message ? message : await element.selector + ' is not visible.';
-        let EC = require('wdio-wait-for');
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = message ? message : `${await element.selector } is not visible.`;
+        const EC = require('wdio-wait-for');
         await browser.waitUntil(EC.visibilityOf(element), {
             timeout: to,
             timeoutMsg: mess,
         });
-    };
+    }
 
     /**
      * This function will help to wait until web element invisible
@@ -126,10 +127,10 @@ export class PageActions {
      * @param {Number} timeout | Custom timeout
      */
     protected async waitElementInvisible(element: any, message?: string, timeout: number = TIMEOUT): Promise<void> {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = message ? message : await element.selector + ' is presented.';
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = message ? message : `${await element.selector } is presented.`;
         await element.waitForDisplayed({ timeout: to, reverse: true, timeoutMsg: mess });
-    };
+    }
 
     /**
      * This function will help to check if web element is clickable
@@ -138,10 +139,10 @@ export class PageActions {
      * @param {Number} timeout | Custom timeout
      */
     protected async waitElementClickable(element: any, message?: string, timeout: number = TIMEOUT): Promise<void> {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = message ? message : await element.selector + 'is not clickable.';
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = message ? message : `${await element.selector }is not clickable.`;
         await element.waitForClickable({ timeout: to, timeoutMsg: mess });
-    };
+    }
 
     //-----------------------------------------------------------
     // WEB ELEMENTS INTERACTION ADVANCED METHODS
@@ -159,7 +160,7 @@ export class PageActions {
         } catch (error) {
             throw new Error(`Unable to clear ${element.name}: ${error}`);
         }
-    };
+    }
 
     /**
      * This function will help to get web element text
@@ -172,7 +173,7 @@ export class PageActions {
         } catch (error) {
             throw new Error(`Unable to get ${element.name} element text: ${error}`);
         }
-    };
+    }
 
     /**
      * This function will help to click on the web element
@@ -186,7 +187,7 @@ export class PageActions {
         } catch (error) {
             throw new Error(`Unable to click on ${await element.selector} element: ${error}`);
         }
-    };
+    }
 
     /**
      * This function will help to fill the web element with text
@@ -200,7 +201,7 @@ export class PageActions {
         } catch (error) {
             throw new Error(`Unable to fill ${await element.selector} element with ${inputValue} value: ${error}`);
         }
-    };
+    }
 
     /**
      * This function waits for a web element, clears its content and fills it with the provided text
@@ -215,7 +216,7 @@ export class PageActions {
         } catch (error) {
             throw new Error(`Unable to fill ${await element.selector} element with ${inputValue} value: ${error}`);
         }
-    };
+    }
 
     /**
      * This function waits for a web element to become visible, and then pastes the text from the clipboard.
@@ -225,12 +226,11 @@ export class PageActions {
     protected async pasteTextFromClipboard(element: any, message?: string): Promise<void> {
         try {
             await this.waitElementVisible(element, message);
-            await browser.keys(["Command", "v"]); // Adjust the key combination for different platforms
+            await browser.keys(['Command', 'v']); // Adjust the key combination for different platforms
         } catch (error) {
             throw new Error(`Unable to paste text from clipboard: ${error}`);
         }
     }
-
 
     //-----------------------------------------------------------
     // FILES INTERACTION METHODS
@@ -242,8 +242,8 @@ export class PageActions {
      * @param {number} timeout | Custom timeout
      */
     protected async waitForFileExists(filePath: string, timeout: number = TIMEOUT): Promise<void> {
-        let to = timeout ? timeout : browser.config.waitforTimeout;
-        let mess = `The file ${filePath} did not exist within ${timeout}ms`;
+        const to = timeout ? timeout : browser.config.waitforTimeout;
+        const mess = `The file ${filePath} did not exist within ${timeout}ms`;
         await browser.waitUntil(async () => {
             try {
                 fs.accessSync(filePath);
@@ -277,12 +277,12 @@ export class PageActions {
             fs.unlinkSync(tempScreenshotPath);
             if (parseFloat(diffPercentage) > threshold) {
                 allure.addAttachment('CLICK-ME! - UI COMPARISON SNAPSHOT DIFF', fs.readFileSync(diffScreenshotPath), 'image/png');
-                throw new Error(`The screenshots don't match. Difference: ${diffPercentage}`)
+                throw new Error(`The screenshots don't match. Difference: ${diffPercentage}`);
             } else {
                 console.log('Screenshots are matching');
             }
         } catch (error) {
             throw new Error(`Screenshots comparison error: ${error}`);
         }
-    };
-};
+    }
+}

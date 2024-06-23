@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import * as links from '@data/links';
 import { Languages } from '@data/languages';
 import { Tabs } from '@data/web-tabs';
