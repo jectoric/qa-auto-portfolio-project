@@ -9,6 +9,7 @@
             "@page-objects/*": ["./google-translate-autotests/page-objects/*"],
             "@helpers/*": ["./google-translate-autotests/helpers/*"],
             "@data/*": ["./google-translate-autotests/data/*"],
+            "@reporter/*": ["./google-translate-autotests/reporter/*"],
         },
         "types": [
             "node",
@@ -20,6 +21,8 @@
         "target": "es2022"
     },
     "include": [
-        "./google-translate-autotests/**/**/*.ts"
+        "./**/*",
+        "./**/*.ts",
+        "./**/**/*.ts"
     ]
 }

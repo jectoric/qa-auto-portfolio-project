@@ -1,7 +1,6 @@
 'use strict'
 import * as constants from '@data/constants';
 import { PageActions } from '@helpers/page-actions';
-import { takeScreenShot } from '../../../helpers/artifacts';
 import { PageObjects } from '@page-objects/pageObjects';
 
 describe('Google Translate | Text Translate Regression Tests', () => {
@@ -15,10 +14,6 @@ describe('Google Translate | Text Translate Regression Tests', () => {
 
     beforeEach(async () => {
         await pageObjects.selectLanguagePage.selectFromToLanguages(tabName, 'English', 'Ukrainian');
-    });
-
-    afterEach(async () => {
-        await takeScreenShot();
     });
 
     afterAll(async () => {
